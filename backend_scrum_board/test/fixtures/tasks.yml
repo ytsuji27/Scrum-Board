@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  creator: one
+  project: MyString
+  assigned: one
+  category: MyString
+  content: MyText
+
+two:
+  creator: two
+  project: MyString
+  assigned: two
+  category: MyString
+  content: MyText
