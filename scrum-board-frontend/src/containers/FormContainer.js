@@ -1,5 +1,8 @@
+//####### IMPORT PACKAGES #######//
 import React from 'react';
+//####### IMPORT COMPONENTS #######//
 import LoginForm from '../components/LoginForm';
+import NewUserForm from '../components/NewUserForm';
 
 class FormContainer extends React.Component {
   
@@ -10,30 +13,34 @@ class FormContainer extends React.Component {
     }
   }
 
+  switchForm = () => {
+    if (this.state.showForm === 'LoginForm') {
+      this.setState({ showForm: 'NewUserForm' })
+    } else {
+      this.setState({ showForm: 'LoginForm'})
+    }
+  }
+
   render() {
     let showPage;
     if (this.state.showForm === 'LoginForm') {
       showPage = <LoginForm
                    saveToken={this.props.saveToken}
-                   login={this.props.login}
+                   setCurrentUser={this.props.setCurrentUser}
+                   switchForm={this.switchForm}
                  />
     } else {
-      showPage = '<CreateUserForm />'
+      showPage = <NewUserForm 
+                    saveToken={this.props.saveToken}
+                    setCurrentUser={this.props.setCurrentUser}
+                    switchForm={this.switchForm}
+                 />
     }
 
     return(
       <div>
         FormContainer
-
-        {this.props.loggedIn ?
-        null
-        :
-        <LoginForm
-          saveToken={this.props.saveToken}
-          login={this.props.login}
-        />
-        }
-
+        {showPage}
       </div>
     )
   }

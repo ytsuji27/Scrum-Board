@@ -1,3 +1,4 @@
+//####### IMPORT PACKAGES #######//
 import React from 'react';
 
 const LOGIN_URL = 'http://localhost:3000/api/v1/login';
@@ -44,27 +45,34 @@ class LoginForm extends React.Component {
       alert(data.message)
     } else {
       this.props.saveToken(data.jwt)
-      this.props.login(data.user)
+      this.props.setCurrentUser(data.user)
     }
   }
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <input 
-          type="text" 
-          name="username" 
-          value={this.state.username}
-          onChange={this.handleChange}
-        />
-        <input 
-          type="password" 
-          name="password" 
-          value={this.state.password} 
-          onChange={this.handleChange}
-        />
-        <button>Login</button>
-      </form>
+      <>
+        Login Form
+        <form onSubmit={this.handleSubmit}>
+          <input
+            type="text" 
+            name="username" 
+            value={this.state.username}
+            onChange={this.handleChange}
+          />
+          <input 
+            type="password" 
+            name="password" 
+            value={this.state.password} 
+            onChange={this.handleChange}
+          />
+          <button>Login</button>
+        </form>
+
+        <button onClick={this.props.switchForm}>
+          Don't have an account yet? Click here to create one
+        </button>
+      </>
     )
   }
 
