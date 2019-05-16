@@ -1,6 +1,6 @@
 //####### IMPORT PACKAGES #######//
 import React from 'react';
-import { Form, Button, Input } from 'semantic-ui-react';
+import { Form } from 'semantic-ui-react';
 //####### IMPORT IMAGES #######//
 import option1 from '../assets/avatar/Avatar (1).svg';
 import option2 from '../assets/avatar/Avatar (2).svg';
@@ -9,8 +9,8 @@ import option4 from '../assets/avatar/Avatar (4).svg';
 import option5 from '../assets/avatar/Avatar (5).svg';
 import option6 from '../assets/avatar/Avatar (6).svg';
 import option7 from '../assets/avatar/Avatar (7).svg';
-
-const CREATE_USER_URL = 'http://localhost:3000/api/v1/users'
+//####### IMPORT MISC #######//
+import { USERS_URL, HEADERBODY } from '../constants'
 
 class NewUserForm extends React.Component {
 
@@ -36,12 +36,9 @@ class NewUserForm extends React.Component {
   handleSubmit = event => {
     event.preventDefault();
     let loginInfo = this.state
-    fetch(CREATE_USER_URL, {
+    fetch(USERS_URL, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json'
-      },
+      headers: HEADERBODY,
       body: JSON.stringify({ user: loginInfo })
     })
     .then(resp => resp.json())
@@ -68,7 +65,6 @@ class NewUserForm extends React.Component {
   render() {
     return (
       <>
-        New User Form
         <Form onSubmit={this.handleSubmit}>
           <Form.Input 
             label="Username"
@@ -133,12 +129,13 @@ class NewUserForm extends React.Component {
               onChange={this.handleRadioChange}
             />
           </Form.Group>
-          <Button>Create Account</Button>
+          <Form.Checkbox label='I agree to the Terms and Conditions' />
+          <Form.Button>Create Account</Form.Button>
         </Form>
 
-        <Button onClick={this.props.switchForm}>
+        <div onClick={this.props.switchForm}>
           Have an account already? Click here to log in
-        </Button>
+        </div>
       </>
     )
   }

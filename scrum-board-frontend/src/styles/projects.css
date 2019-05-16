@@ -1,0 +1,24 @@
+/* --- DASHBOARD --- */
+#header {
+  margin-left: 15px;
+}
+
+/* --- PROJECTS --- */
+#card {
+  margin: 20px;
+  width: 200px;
+  height: 200px;
+  background-color: khaki;
+  /* background-image: url('../assets/images/13461.eps'); */
+  font-family: 'Chalkduster';
+}
+
+#card .header {
+  font-family: 'Chalkduster';
+}
+
+@font-face {
+  font-family: 'Chalkduster';
+  src: url('./fonts/Chalkduster.ttf');
+}
+
