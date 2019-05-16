@@ -1,0 +1,25 @@
+/* --- NEW USER FORM --- */
+#avatar {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  margin: 10px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+input[type='radio'], .avatar-img {
+  opacity: 0.3;
+}
+
+
+input[type='radio'] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+input[type='radio']:checked + label .avatar-img {
+  opacity: 1.0;
+}

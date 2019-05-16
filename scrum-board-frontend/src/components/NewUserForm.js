@@ -11,6 +11,7 @@ import option6 from '../assets/avatar/Avatar (6).svg';
 import option7 from '../assets/avatar/Avatar (7).svg';
 //####### IMPORT MISC #######//
 import { USERS_URL, HEADERBODY } from '../constants'
+import '../styles/form.css';
 
 class NewUserForm extends React.Component {
 
@@ -30,7 +31,7 @@ class NewUserForm extends React.Component {
   }
 
   handleRadioChange = event => {
-    this.setState({ avatar: event.target.value })
+    this.setState({ avatar: event.currentTarget.value })
   }
 
   handleSubmit = event => {
@@ -84,50 +85,92 @@ class NewUserForm extends React.Component {
             onChange={this.handleChange}
             required
           />
-          <Form.Group>
+          <Form.Group id='radioGroup'>
             <label>Select an avatar</label>
-            <Form.Radio
-              label="Option 1"
-              value="option1"
-              checked={this.state.avatar === 'option1'}
-              onChange={this.handleRadioChange}
-            />
-            <Form.Radio
-              label="Option 2"
-              value="option2"
-              checked={this.state.avatar === 'option2'}
-              onChange={this.handleRadioChange}
-            />
-            <Form.Radio
-              label="Option 3"
-              value="option3"
-              checked={this.state.avatar === 'option3'}
-              onChange={this.handleRadioChange}
-            />
-            <Form.Radio
-              label="Option 4"
-              value="option4"
-              checked={this.state.avatar === 'option4'}
-              onChange={this.handleRadioChange}
-            />
-            <Form.Radio
-              label="Option 5"
-              value="option5"
-              checked={this.state.avatar === 'option5'}
-              onChange={this.handleRadioChange}
-            />
-            <Form.Radio
-              label="Option 6"
-              value="option6"
-              checked={this.state.avatar === 'option6'}
-              onChange={this.handleRadioChange}
-            />
-            <Form.Radio
-              label="Option 7"
-              value="option7"
-              checked={this.state.avatar === 'option7'}
-              onChange={this.handleRadioChange}
-            />
+            <label id='avatar'>
+              <input
+                id='option1'
+                type='radio'
+                value="option1"
+                checked={this.state.avatar === 'option1'}
+                onChange={this.handleRadioChange}
+              />
+              <label for='option1'>
+                <img src={option1} alt="option1" className='avatar-img' />
+              </label>
+            </label>
+            <label id='avatar'>
+              <input
+                id='option2'
+                type='radio'
+                value="option2"
+                checked={this.state.avatar === 'option2'}
+                onChange={this.handleRadioChange}
+              />
+              <label for='option2'>
+                <img src={option2} alt="option2" className='avatar-img' />
+              </label>
+            </label>
+            <label id='avatar'>
+              <input
+                id='option3'
+                type='radio'
+                value="option3"
+                checked={this.state.avatar === 'option3'}
+                onChange={this.handleRadioChange}
+              />
+              <label for='option3'>
+                <img src={option3} alt="option3" className='avatar-img' />
+              </label>
+            </label>
+            <label id='avatar'>
+              <input
+                id='option4'
+                type='radio'
+                value="option4"
+                checked={this.state.avatar === 'option4'}
+                onChange={this.handleRadioChange}
+              />
+              <label for='option4'>
+                <img src={option4} alt="option4" className='avatar-img' />
+              </label>
+            </label>
+            <label id='avatar'>
+              <input
+                id='option5'
+                type='radio'
+                value="option5"
+                checked={this.state.avatar === 'option5'}
+                onChange={this.handleRadioChange}
+              />
+              <label for='option5'>
+                <img src={option5} alt="option5" className='avatar-img' />
+              </label>
+            </label>
+            <label id='avatar'>
+              <input
+                id='option6'
+                type='radio'
+                value="option6"
+                checked={this.state.avatar === 'option6'}
+                onChange={this.handleRadioChange}
+              />
+              <label for='option6'>
+                <img src={option6} alt="option6" className='avatar-img' />
+              </label>
+            </label>
+            <label id='avatar'>
+              <input
+                id='option7'
+                type='radio'
+                value="option7"
+                checked={this.state.avatar === 'option7'}
+                onChange={this.handleRadioChange}
+              />
+              <label for='option7'>
+                <img src={option7} alt="option7" className='avatar-img' />
+              </label>
+            </label>
           </Form.Group>
           <Form.Checkbox label='I agree to the Terms and Conditions' />
           <Form.Button>Create Account</Form.Button>

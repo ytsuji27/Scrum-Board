@@ -1,3 +1,10 @@
+/* --- IMPORT FONTS --- */
+@import url('https://fonts.googleapis.com/css?family=Nanum+Pen+Script');
+@import url('https://fonts.googleapis.com/css?family=Gochi+Hand');
+@import url('https://fonts.googleapis.com/css?family=Coming+Soon');
+@import url('https://fonts.googleapis.com/css?family=Short+Stack');
+
+
 /* --- DASHBOARD --- */
 #header {
   margin-left: 15px;
@@ -10,15 +17,21 @@
   height: 200px;
   background-color: khaki;
   /* background-image: url('../assets/images/13461.eps'); */
-  font-family: 'Chalkduster';
+  /* font-family: 'Nanum Pen Script', cursive; */
+  /* font-family: 'Gochi Hand', cursive; */
+  /* font-family: 'Coming Soon', cursive; */
+  font-family: 'Short Stack', cursive;
 }
 
 #card .header {
-  font-family: 'Chalkduster';
+  /* font-family: 'Nanum Pen Script', cursive; */
+  /* font-family: 'Gochi Hand', cursive; */
+  /* font-family: 'Coming Soon', cursive; */
+  font-family: 'Short Stack', cursive;
 }
 
-@font-face {
+/* @font-face {
   font-family: 'Chalkduster';
   src: url('./fonts/Chalkduster.ttf');
-}
+} */
 
