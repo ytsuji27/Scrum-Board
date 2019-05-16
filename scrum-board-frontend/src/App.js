@@ -7,6 +7,7 @@ import Dashboard from './containers/Dashboard';
 import history from './history';
 //####### IMPORT MISC #######//
 import './App.css';
+import { PROFILE_URL } from './constants'
 
 class App extends React.Component {
 
@@ -37,18 +38,32 @@ class App extends React.Component {
   }
 
   logout = () => {
-    console.log("Log out!")
     this.setState({
       currentUser: null,
       loggedIn: false
     })
+    localStorage.removeItem('jwt')
+  }
+
+  // Automatically sends user to dashboard if a token is found in local storage
+  componentDidMount() {
+    if (this.getToken()) {
+      let token = this.getToken();
+      fetch(PROFILE_URL, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      .then(resp => resp.json())
+      .then(data => this.setCurrentUser(data.user))
+    }
   }
 
   render() {
     return (
       <Router history={history}>
         <div>
-          App
           <Route exact path="/login" render={ props => <FormContainer
                                                            {...props}
                                                            loggedIn={this.state.loggedIn}
@@ -63,8 +78,9 @@ class App extends React.Component {
                                                     <Dashboard
                                                       {...props}
                                                       loggedIn={this.state.loggedIn}
-                                                      getToken={this.state.getToken}
+                                                      getToken={this.getToken}
                                                       logout={this.logout}
+                                                      currentUser={this.state.currentUser}
                                                     />
                                                   ))
                                         } 

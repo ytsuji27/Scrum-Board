@@ -1,7 +1,8 @@
 //####### IMPORT PACKAGES #######//
 import React from 'react';
-
-const LOGIN_URL = 'http://localhost:3000/api/v1/login';
+import { Form } from 'semantic-ui-react';
+//####### IMPORT MISC #######//
+import { LOGIN_URL, HEADERBODY } from '../constants.js'
 
 class LoginForm extends React.Component {
 
@@ -24,10 +25,7 @@ class LoginForm extends React.Component {
     let loginInfo = this.state
     fetch(LOGIN_URL, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json'
-      },
+      headers: HEADERBODY,
       body: JSON.stringify({ user: loginInfo })
     })
     .then(resp => resp.json())
@@ -52,26 +50,31 @@ class LoginForm extends React.Component {
   render() {
     return (
       <>
-        Login Form
-        <form onSubmit={this.handleSubmit}>
-          <input
+        <Form onSubmit={this.handleSubmit}>
+          <Form.Input 
+            label="Username"
             type="text" 
-            name="username" 
+            name="username"
+            placeholder="Username" 
             value={this.state.username}
             onChange={this.handleChange}
+            required
           />
-          <input 
+          <Form.Input 
+            label="Password"
             type="password" 
             name="password" 
+            placeholder="Password"
             value={this.state.password} 
             onChange={this.handleChange}
+            required
           />
-          <button>Login</button>
-        </form>
+          <Form.Button>Login</Form.Button>
+        </Form>
 
-        <button onClick={this.props.switchForm}>
+        <div onClick={this.props.switchForm}>
           Don't have an account yet? Click here to create one
-        </button>
+        </div>
       </>
     )
   }
