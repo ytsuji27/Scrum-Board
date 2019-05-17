@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       get '/profile', to: 'users#profile'
       resources :projects
       resources :tasks
+      get '/projecttasks/:id', to: 'tasks#projecttasks'
       resources :userproject
     end
   end

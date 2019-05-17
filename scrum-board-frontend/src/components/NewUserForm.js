@@ -49,7 +49,6 @@ class NewUserForm extends React.Component {
         password: '',
         avatar: ''
       })
-      console.log(data)
       this.handleResponse(data);
     })
   }
