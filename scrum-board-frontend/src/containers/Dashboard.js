@@ -1,9 +1,11 @@
 //####### IMPORT PACKAGES #######//
 import React from 'react';
-import { Header } from 'semantic-ui-react';
+import { Header, Menu } from 'semantic-ui-react';
 //####### IMPORT COMPONENTS #######//
 import Navbar from './Navbar';
 import ProjectContainer from './ProjectContainer';
+import MenuBar from '../components/MenuBar';
+import ProjectShowPage from '../containers/ProjectShowPage';
 import '../styles/projects.css';
 
 class Dashboard extends React.Component {
@@ -20,19 +22,37 @@ class Dashboard extends React.Component {
     this.setState({ showPage: selectedProject })
   }
 
-  render() {
+  handleClick = () => {
+    this.props.openNewProjectModal();
+  }
 
+  showProjectContainer() {
+    return (
+      <ProjectContainer
+      getToken={this.props.getToken}
+      showProject={this.showProject}
+      currentUser={this.props.currentUser}
+      projects={this.props.projects}
+    />
+    )
+  }
+
+  render() {
     return (
       <>
         <Navbar
           logout={this.props.logout}
-        />
-        <Header id='header' as='h1'>Projects</Header>
-        <ProjectContainer
-          getToken={this.props.getToken}
-          showProject={this.showProject}
           currentUser={this.props.currentUser}
         />
+        <MenuBar
+          openNewProjectModal={this.props.openNewProjectModal}
+          showPage={this.state.showPage}
+        />
+        {this.state.showPage === 'Projects' ?
+          this.showProjectContainer()
+          :
+          <ProjectShowPage />
+        }
       </>
     )
   }

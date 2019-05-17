@@ -5,9 +5,10 @@ import { Router, Route, Redirect } from 'react-router-dom';
 import FormContainer from './containers/FormContainer';
 import Dashboard from './containers/Dashboard';
 import history from './history';
+import NewProjectForm from './components/NewProjectForm';
 //####### IMPORT MISC #######//
 import './App.css';
-import { PROFILE_URL } from './constants'
+import { PROFILE_URL, PROJECTS_URL } from './constants'
 
 class App extends React.Component {
 
@@ -15,10 +16,15 @@ class App extends React.Component {
     super();
     this.state = {
       currentUser: null,
-      loggedIn: false
+      loggedIn: false,
+      newProjectShow: false,
+      projects: []
     }
   }
 
+  // ########################### //
+  // ####### LOGIN STUFF ####### //
+  // ########################### //
   getToken() {
     let token = localStorage.getItem('jwt');
     return token
@@ -48,17 +54,57 @@ class App extends React.Component {
   // Automatically sends user to dashboard if a token is found in local storage
   componentDidMount() {
     if (this.getToken()) {
-      let token = this.getToken();
-      fetch(PROFILE_URL, {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      })
-      .then(resp => resp.json())
-      .then(data => this.setCurrentUser(data.user))
+      this.fetchProfile();
+      this.fetchProjects();
     }
   }
+  
+  // ########################### //
+  // ####### MODAL STUFF ####### //
+  // ########################### //
+  closeNewProjectModal = () => {
+    this.setState({ newProjectShow: false })
+  }
+
+  openNewProjectModal = () => {
+    this.setState({ newProjectShow: true })
+  }
+  
+  // ########################### //
+  // ####### FETCH STUFF ####### //
+  // ########################### //
+  fetchProjects = () => {
+    let token = this.getToken();
+    fetch(PROJECTS_URL, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+    .then(resp => resp.json())
+    .then(data => {
+      this.setState({ projects: data })
+    })
+  }
+
+  fetchProfile = () => {
+    let token = this.getToken();
+    fetch(PROFILE_URL, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+    .then(resp => resp.json())
+    .then(data => this.setCurrentUser(data.user))
+  }
+
+  // Triggered by new Project POST request in NewProjectForm
+  addNewProject = project => {
+    let newProjects = [...this.state.projects, project]
+    this.setState({ projects: newProjects })
+  }
+
 
   render() {
     return (
@@ -81,10 +127,21 @@ class App extends React.Component {
                                                       getToken={this.getToken}
                                                       logout={this.logout}
                                                       currentUser={this.state.currentUser}
+                                                      openNewProjectModal={this.openNewProjectModal}
+                                                      projects={this.state.projects}
                                                     />
                                                   ))
                                         } 
           />
+          {this.state.newProjectShow ? 
+            <NewProjectForm 
+              closeNewProjectModal={this.closeNewProjectModal}
+              currentUser={this.state.currentUser}
+              getToken={this.getToken}
+              addNewProject={this.addNewProject}
+            /> 
+            : null
+          }
         </div>
       </Router>
     )

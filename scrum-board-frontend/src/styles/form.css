@@ -23,3 +23,13 @@ input[type='radio'] {
 input[type='radio']:checked + label .avatar-img {
   opacity: 1.0;
 }
+
+/* --- NEW PROJECT FORM --- */
+#new-project-modal {
+  width: 400px;
+}
+
+#new-project-modal-description {
+  height: 100px;
+  margin-bottom: 14px;
+}

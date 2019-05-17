@@ -1,0 +1,11 @@
+/* --- PROFILE --- */
+.profile-avatar {
+  margin: auto;
+  padding: 15px;
+}
+
+/* --- PROJECTS --- */
+#project-menu-bar {
+  border: 0px;
+  box-shadow: 0px 0px 0px 0px;
+}
