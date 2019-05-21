@@ -1,6 +1,6 @@
 /* --- NEW CATEGORY BUTTON --- */
 #new-category-button {
-  width: 310px;
+  width: 270px;
   height: 100%;
   border-style: dashed;
   border-width: 1px;
@@ -13,7 +13,7 @@
 
 /* --- NEW CATEGORY FORM --- */
 #new-category-form {
-  width: 310px;
+  width: 270px;
   /* height: 100%; */
   border-style: dashed;
   border-width: 1px;
@@ -35,7 +35,7 @@
 #category {
   margin: 10px;
   flex: 0 0 auto;
-  width: 310px;
+  width: 270px;
 }
 
 /* --- CATEGORY CARD --- */
@@ -46,4 +46,9 @@
 #category-option {
   display: inline;
   float: right;
+}
+
+#category-card-header {
+  /* height: 47px; */
+  /* NOT WORKING */
 }

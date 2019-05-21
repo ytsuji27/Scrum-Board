@@ -55,6 +55,7 @@ class Dashboard extends React.Component {
       <CategoryContainer
         project={this.state.selectedProject}
         getToken={this.props.getToken}
+        currentUser={this.props.currentUser}
       />
     )
   }
@@ -86,6 +87,7 @@ class Dashboard extends React.Component {
             getToken={this.props.getToken}
             removeProjectFromState={this.props.removeProjectFromState}
             addNewProject={this.props.addNewProject}
+            setSelectedProject={this.setSelectedProject}
           /> 
           : null
         }

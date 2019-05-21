@@ -20,8 +20,6 @@ class EditProjectForm extends React.Component {
   }
 
   editProject = () => {
-    // let currentuser = this.props.currentUser.id;
-    // let body = {...this.state, user_id: currentuser};
     let token = this.props.getToken();
     fetch(PROJECTS_URL + `/${this.props.selectedProject.id}`, {
       method: 'PATCH',
@@ -45,6 +43,8 @@ class EditProjectForm extends React.Component {
       this.props.closeEditProjectModal();
       this.props.removeProjectFromState(data);
       this.props.addNewProject(data);
+      let ev = null;
+      this.props.setSelectedProject(ev, data);
     }
     console.log(data);
   }

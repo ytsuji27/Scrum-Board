@@ -26,6 +26,18 @@ class CategoryContainer extends React.Component {
     this.setState({ showAddColumnButton: false })
   }
 
+  addTaskToState = task => {
+    let newTasks = [...this.state.tasks, task]
+    this.setState({ tasks: newTasks })
+  }
+
+  removeTaskFromState = deleteTask => {
+    let newTasks = this.state.tasks.filter(task => {
+      return task !== deleteTask
+    })
+    this.setState({ tasks: newTasks })
+  }
+
   handleChange = event => {
     this.setState({
       [event.target.name]: event.target.value
@@ -131,6 +143,9 @@ class CategoryContainer extends React.Component {
                tasks={this.getTasks(category)} 
                getToken={this.props.getToken}
                deleteCategory={this.deleteCategory}
+               currentUser={this.props.currentUser}
+               addTaskToState={this.addTaskToState}
+               removeTaskFromState={this.removeTaskFromState}
              />
     })
   }

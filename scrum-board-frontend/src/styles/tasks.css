@@ -6,3 +6,22 @@
   background-color: khaki;
   float: left;
 }
+
+#task-detail-modal {
+  width: 500px;
+  height: 500px;
+}
+
+#task-detail-header {
+  border-bottom: 0px;
+}
+
+#task-detail-menu {
+  border: 0px;
+  box-shadow: 0 0px 0px 0;
+}
+
+.khaki {
+  background-color: khaki !important; 
+}
+

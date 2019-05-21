@@ -7,7 +7,13 @@ class TaskContainer extends React.Component {
 
   showTasks = () => {
     return this.props.tasks.map((task, index) => {
-      return <TaskCard task={task} key={index} />
+      return <TaskCard 
+               task={task} 
+               key={index} 
+               getToken={this.props.getToken}
+               addTaskToState={this.props.addTaskToState}
+               removeTaskFromState={this.props.removeTaskFromState}
+             />
     })
   }
 
