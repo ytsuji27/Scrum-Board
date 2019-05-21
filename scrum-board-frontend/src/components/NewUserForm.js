@@ -94,7 +94,7 @@ class NewUserForm extends React.Component {
                 checked={this.state.avatar === 'option1'}
                 onChange={this.handleRadioChange}
               />
-              <label for='option1'>
+              <label htmlFor='option1'>
                 <img src={option1} alt="option1" className='avatar-img' />
               </label>
             </label>
@@ -106,7 +106,7 @@ class NewUserForm extends React.Component {
                 checked={this.state.avatar === 'option2'}
                 onChange={this.handleRadioChange}
               />
-              <label for='option2'>
+              <label htmlFor='option2'>
                 <img src={option2} alt="option2" className='avatar-img' />
               </label>
             </label>
@@ -118,7 +118,7 @@ class NewUserForm extends React.Component {
                 checked={this.state.avatar === 'option3'}
                 onChange={this.handleRadioChange}
               />
-              <label for='option3'>
+              <label htmlFor='option3'>
                 <img src={option3} alt="option3" className='avatar-img' />
               </label>
             </label>
@@ -130,7 +130,7 @@ class NewUserForm extends React.Component {
                 checked={this.state.avatar === 'option4'}
                 onChange={this.handleRadioChange}
               />
-              <label for='option4'>
+              <label htmlFor='option4'>
                 <img src={option4} alt="option4" className='avatar-img' />
               </label>
             </label>
@@ -142,7 +142,7 @@ class NewUserForm extends React.Component {
                 checked={this.state.avatar === 'option5'}
                 onChange={this.handleRadioChange}
               />
-              <label for='option5'>
+              <label htmlFor='option5'>
                 <img src={option5} alt="option5" className='avatar-img' />
               </label>
             </label>
@@ -154,7 +154,7 @@ class NewUserForm extends React.Component {
                 checked={this.state.avatar === 'option6'}
                 onChange={this.handleRadioChange}
               />
-              <label for='option6'>
+              <label htmlFor='option6'>
                 <img src={option6} alt="option6" className='avatar-img' />
               </label>
             </label>
@@ -166,7 +166,7 @@ class NewUserForm extends React.Component {
                 checked={this.state.avatar === 'option7'}
                 onChange={this.handleRadioChange}
               />
-              <label for='option7'>
+              <label htmlFor='option7'>
                 <img src={option7} alt="option7" className='avatar-img' />
               </label>
             </label>

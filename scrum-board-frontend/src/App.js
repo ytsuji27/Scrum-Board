@@ -39,6 +39,7 @@ class App extends React.Component {
       currentUser: user,
       loggedIn: true
     })
+    this.fetchProjects();
     // Redirects user to dashboard after successful login
     history.push('/');
   }
@@ -46,7 +47,9 @@ class App extends React.Component {
   logout = () => {
     this.setState({
       currentUser: null,
-      loggedIn: false
+      loggedIn: false,
+      newProjectShow: false,
+      projects: []
     })
     localStorage.removeItem('jwt')
   }
@@ -73,6 +76,7 @@ class App extends React.Component {
   // ########################### //
   // ####### FETCH STUFF ####### //
   // ########################### //
+
   fetchProjects = () => {
     let token = this.getToken();
     fetch(PROJECTS_URL, {
@@ -105,7 +109,29 @@ class App extends React.Component {
     this.setState({ projects: newProjects })
   }
 
+  // Triggered from MenuBar
+  deleteProject = project => {
+    let token = this.getToken();
+    fetch(PROJECTS_URL + `/${project.id}`, {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+    .then(resp => this.removeProjectFromState(project))
+  }
 
+  // Removes deleted project from state, so dash updates on delete
+  removeProjectFromState = deleteThisProject => {
+    let newProjectsArray = this.state.projects.filter(project => {
+      return project.id !== deleteThisProject.id;
+    })
+    this.setState({ projects: newProjectsArray })
+  }
+
+  // ########################### //
+  // ########## RENDER ######### //
+  // ########################### //
   render() {
     return (
       <Router history={history}>
@@ -129,6 +155,9 @@ class App extends React.Component {
                                                       currentUser={this.state.currentUser}
                                                       openNewProjectModal={this.openNewProjectModal}
                                                       projects={this.state.projects}
+                                                      deleteProject={this.deleteProject}
+                                                      removeProjectFromState={this.removeProjectFromState}
+                                                      addNewProject={this.addNewProject}
                                                     />
                                                   ))
                                         } 

@@ -1,6 +1,7 @@
 //####### IMPORT PACKAGES #######//
 import React from 'react';
-import { Menu, Segment, Dropdown, Image, Input, Search, Button, Icon } from 'semantic-ui-react';
+import { withRouter } from 'react-router-dom';
+import { Confirm, Menu, Dropdown, Input, Icon } from 'semantic-ui-react';
 //####### IMPORT MISC #######//
 import '../styles/navbar.css';
 
@@ -9,15 +10,19 @@ class MenuBar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      openConfirmation: false
     }
   }
 
-  handleClick = () => {
-    console.log('clicked')
+  // ############################# //
+  // ####### PROJECTS VIEW ####### //
+  // ############################# //
+
+  handleAddProjectClick = () => {
     this.props.openNewProjectModal();
   }
 
+  
   showProjectsBar() {
     return (
       <Menu id='project-menu-bar'>
@@ -36,7 +41,7 @@ class MenuBar extends React.Component {
             </Dropdown.Menu>
           </Dropdown>
         </Menu.Item>
-        <Menu.Item position='right' onClick={this.handleClick}>
+        <Menu.Item position='right' onClick={this.handleAddProjectClick}>
           <Icon name='add' />
           Add Project
         </Menu.Item>
@@ -44,19 +49,60 @@ class MenuBar extends React.Component {
     )
   }
 
+  // ############################ //
+  // ####### PROJECT VIEW ####### //
+  // ############################ //
+
+  handleProjectEditClick = () => {
+    this.props.openEditProjectModal();
+  }
+
+  showConfirmation = () => {
+    this.setState({ openConfirmation: true })
+  }
+
+  handleConfirm = () => {
+    this.setState({ openConfirmation: false })
+    this.props.deleteProject(this.props.selectedProject);
+    this.props.setShowPageToProjects();
+  }
+
+  handleCancel = () => {
+    this.setState({ openConfirmation: false })
+  }
+
+  goBackToProjects = () => {
+    this.props.setShowPageToProjects();
+  }
+
   showProjectTitleBar() {
     return (
       <Menu id='project-menu-bar'>
-        <Menu.Item header>{this.props.showPage}</Menu.Item>
+        <Menu.Item onClick={this.goBackToProjects}>
+          <Icon name='chevron left' />
+        </Menu.Item>
+        <Menu.Item header>{this.props.selectedProject.name}</Menu.Item>
+        <Menu.Item>{this.props.selectedProject.description}</Menu.Item>
+        <Menu.Item position='right' onClick={this.handleProjectEditClick}>
+          <Icon name='edit' />
+        </Menu.Item>
+        <Menu.Item onClick={this.showConfirmation}>
+          <Icon name='trash alternate outline' />
+        </Menu.Item>
+        <Confirm open={this.state.openConfirmation} onCancel={this.handleCancel} onConfirm={this.handleConfirm} />
       </Menu>
     )
   }
 
+  // ############################ //
+  // ########## RENDER ########## //
+  // ############################ //
+
   render() {
-    let { showPage } = this.props
+    let { selectedProject } = this.props
     return (
       <>
-        {showPage === 'Projects' ?
+        {selectedProject === null ?
           this.showProjectsBar()
           : 
           this.showProjectTitleBar() 
@@ -68,4 +114,4 @@ class MenuBar extends React.Component {
 
 }
 
-export default MenuBar;
+export default withRouter(MenuBar);

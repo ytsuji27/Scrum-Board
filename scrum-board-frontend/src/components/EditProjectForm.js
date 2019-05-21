@@ -5,13 +5,13 @@ import { Form, Button, Modal } from "semantic-ui-react";
 import '../styles/form.css';
 import { PROJECTS_URL, HEADERBODY } from '../constants'
 
-class NewProjectForm extends React.Component {
+class EditProjectForm extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
-      description: ''
+      name: this.props.selectedProject.name,
+      description: this.props.selectedProject.description
     }
   }
 
@@ -19,14 +19,14 @@ class NewProjectForm extends React.Component {
     this.setState({ [ev.target.name]: ev.target.value });
   }
 
-  postProject = () => {
-    let currentuser = this.props.currentUser.id;
-    let body = {...this.state, user_id: currentuser};
+  editProject = () => {
+    // let currentuser = this.props.currentUser.id;
+    // let body = {...this.state, user_id: currentuser};
     let token = this.props.getToken();
-    fetch(PROJECTS_URL, {
-      method: 'POST',
+    fetch(PROJECTS_URL + `/${this.props.selectedProject.id}`, {
+      method: 'PATCH',
       headers: {...HEADERBODY, Authorization: `Bearer ${token}`},
-      body: JSON.stringify(body)
+      body: JSON.stringify(this.state)
     })
     .then(resp => resp.json())
     .then(data => {
@@ -42,9 +42,11 @@ class NewProjectForm extends React.Component {
     if (data.message) {
       alert(data.message)
     } else {
-      this.props.closeNewProjectModal();
+      this.props.closeEditProjectModal();
+      this.props.removeProjectFromState(data);
       this.props.addNewProject(data);
     }
+    console.log(data);
   }
 
 
@@ -58,10 +60,10 @@ class NewProjectForm extends React.Component {
         open
         closeOnEscape
         closeOnDimmerClick
-        onClose={this.props.closeNewProjectModal}
+        onClose={this.props.closeEditProjectModal}
         id='new-project-modal'
       >
-        <Modal.Header>Create a new Project</Modal.Header>
+        <Modal.Header>Edit Project</Modal.Header>
         <Modal.Content>
           <Form>
             <Form.Input
@@ -87,8 +89,8 @@ class NewProjectForm extends React.Component {
                 required
               />
             </div>
-            <Button color='blue' type='submit' onClick={this.postProject}>
-              Create
+            <Button color='blue' type='submit' onClick={this.editProject}>
+              Save
             </Button>
           </Form>
         </Modal.Content>
@@ -98,4 +100,8 @@ class NewProjectForm extends React.Component {
 
 }
 
-export default NewProjectForm;
+EditProjectForm.defaultProps = {
+  selectedProject: { name: '', description: '' }
+};
+
+export default EditProjectForm;

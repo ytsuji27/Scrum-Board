@@ -27,12 +27,16 @@ class Navbar extends React.Component {
       'option7': option7,
     }
     // Chooses corrent avatar from lookup table
-    let avatarPic = avatarChoice[this.props.currentUser.avatar]
-    return (
-      <span>
-        <Image avatar src={avatarPic} /> {this.props.currentUser.username}
-      </span>
-    )
+    if (this.props.currentUser) {
+      let avatarPic = avatarChoice[this.props.currentUser.avatar]
+      return (
+        <span>
+          <Image avatar src={avatarPic} /> {this.props.currentUser.username}
+        </span>
+      )
+    } else {
+      return null
+    }
   }
 
   // Used in the profile dropdown [dropdown options]
