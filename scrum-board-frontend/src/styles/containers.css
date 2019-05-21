@@ -1,0 +1,49 @@
+/* --- NEW CATEGORY BUTTON --- */
+#new-category-button {
+  width: 310px;
+  height: 100%;
+  border-style: dashed;
+  border-width: 1px;
+  /* margin-left: 14px; */
+  margin: 10px;
+  text-align: center;
+  color: #000;
+  flex: 0 0 auto;
+}
+
+/* --- NEW CATEGORY FORM --- */
+#new-category-form {
+  width: 310px;
+  /* height: 100%; */
+  border-style: dashed;
+  border-width: 1px;
+  border-radius: .28571429rem;
+  margin: 10px;
+  padding: 10px;
+  flex: 0 0 auto;
+}
+
+/* --- CATEGORY CONTAINER --- */
+#categories-container {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  padding: 10px;
+  min-height: 180px;
+}
+
+#category {
+  margin: 10px;
+  flex: 0 0 auto;
+  width: 310px;
+}
+
+/* --- CATEGORY CARD --- */
+#category-name {
+  display: inline;
+}
+
+#category-option {
+  display: inline;
+  float: right;
+}

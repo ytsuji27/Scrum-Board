@@ -8,8 +8,7 @@ class Api::V1::TasksController < ApplicationController
 
   # Gets all tasks for single project
   def projecttasks
-    byebug
-    @tasks = Task.where(project_id: someparam)
+    @tasks = Task.where(project_id: params[:id])
     render json: @tasks
   end
 

@@ -1,11 +1,12 @@
 //####### IMPORT PACKAGES #######//
 import React from 'react';
-import { Header, Menu } from 'semantic-ui-react';
 //####### IMPORT COMPONENTS #######//
 import Navbar from './Navbar';
 import ProjectContainer from './ProjectContainer';
 import MenuBar from '../components/MenuBar';
-import ProjectShowPage from '../containers/ProjectShowPage';
+import CategoryContainer from './CategoryContainer';
+import EditProjectForm from '../components/EditProjectForm';
+//####### IMPORT MISC #######//
 import '../styles/projects.css';
 
 class Dashboard extends React.Component {
@@ -13,27 +14,48 @@ class Dashboard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      showPage: 'Projects'
+      selectedProject: null,
+      editProjectShow: false
     }
   }
 
-  showProject = ev => {
-    let selectedProject = ev.currentTarget.firstElementChild.firstElementChild.textContent
-    this.setState({ showPage: selectedProject })
+  setSelectedProject = (ev, project) => {
+    this.setState({ selectedProject: project })
   }
 
   handleClick = () => {
     this.props.openNewProjectModal();
   }
 
+  setShowPageToProjects = () => {
+    this.setState({ selectedProject: null })
+  }
+
   showProjectContainer() {
     return (
       <ProjectContainer
-      getToken={this.props.getToken}
-      showProject={this.showProject}
-      currentUser={this.props.currentUser}
-      projects={this.props.projects}
-    />
+        getToken={this.props.getToken}
+        setSelectedProject={this.setSelectedProject}
+        currentUser={this.props.currentUser}
+        projects={this.props.projects}
+      />
+    )
+  }
+
+  closeEditProjectModal = () => {
+    this.setState({ editProjectShow: false })
+  }
+
+  openEditProjectModal = () => {
+    this.setState({ editProjectShow: true })
+  }
+  
+  showCategoryContainer() {
+    return (
+      <CategoryContainer
+        project={this.state.selectedProject}
+        getToken={this.props.getToken}
+      />
     )
   }
 
@@ -46,12 +68,26 @@ class Dashboard extends React.Component {
         />
         <MenuBar
           openNewProjectModal={this.props.openNewProjectModal}
-          showPage={this.state.showPage}
+          openEditProjectModal={this.openEditProjectModal}
+          selectedProject={this.state.selectedProject}
+          deleteProject={this.props.deleteProject}
+          setShowPageToProjects={this.setShowPageToProjects}
+          project={this.state.selectedProject}
         />
-        {this.state.showPage === 'Projects' ?
+        {this.state.selectedProject === null ?
           this.showProjectContainer()
           :
-          <ProjectShowPage />
+          this.showCategoryContainer()
+        }
+        {this.state.editProjectShow ?
+          <EditProjectForm
+            closeEditProjectModal={this.closeEditProjectModal}
+            selectedProject={this.state.selectedProject}
+            getToken={this.props.getToken}
+            removeProjectFromState={this.props.removeProjectFromState}
+            addNewProject={this.props.addNewProject}
+          /> 
+          : null
         }
       </>
     )

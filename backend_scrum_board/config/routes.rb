@@ -8,6 +8,8 @@ Rails.application.routes.draw do
       resources :tasks
       get '/projecttasks/:id', to: 'tasks#projecttasks'
       resources :userproject
+      get '/projectcategory/:id', to: 'categories#projectcategory'
+      resources :categories
     end
   end
 end

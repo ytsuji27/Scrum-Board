@@ -15,6 +15,14 @@ ActiveRecord::Schema.define(version: 2019_05_14_214910) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.bigint "project_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_categories_on_project_id"
+  end
+
   create_table "projects", force: :cascade do |t|
     t.string "name"
     t.text "description"
@@ -27,12 +35,13 @@ ActiveRecord::Schema.define(version: 2019_05_14_214910) do
   create_table "tasks", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "project_id"
+    t.bigint "category_id"
     t.bigint "assigned_id"
-    t.string "category"
     t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["assigned_id"], name: "index_tasks_on_assigned_id"
+    t.index ["category_id"], name: "index_tasks_on_category_id"
     t.index ["project_id"], name: "index_tasks_on_project_id"
     t.index ["user_id"], name: "index_tasks_on_user_id"
   end
@@ -54,9 +63,11 @@ ActiveRecord::Schema.define(version: 2019_05_14_214910) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "projects", "users"
-  add_foreign_key "tasks", "projects"
-  add_foreign_key "tasks", "users"
-  add_foreign_key "user_projects", "projects"
-  add_foreign_key "user_projects", "users"
+  add_foreign_key "categories", "projects", on_delete: :cascade
+  add_foreign_key "projects", "users", on_delete: :cascade
+  add_foreign_key "tasks", "categories", on_delete: :cascade
+  add_foreign_key "tasks", "projects", on_delete: :cascade
+  add_foreign_key "tasks", "users", on_delete: :cascade
+  add_foreign_key "user_projects", "projects", on_delete: :cascade
+  add_foreign_key "user_projects", "users", on_delete: :cascade
 end

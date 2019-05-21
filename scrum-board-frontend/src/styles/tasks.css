@@ -1,0 +1,8 @@
+/* --- TASK CARD --- */
+#task-card {
+  margin: 10px;
+  width: 100px;
+  height: 100px;
+  background-color: khaki;
+  float: left;
+}
