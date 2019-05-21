@@ -21,10 +21,22 @@ class Api::V1::TasksController < ApplicationController
     end
   end
 
+  def update
+    @task = Task.find(params[:id])
+    @task.update(task_params)
+    render json: @task, status: 201
+  end
+
+  def destroy
+    @task = Task.find(params[:id])
+    @task.destroy
+    render json: { message: 'Deleted successfully' }, status: 204
+  end
+
   private
 
   def task_params
-      params.require(:task).permit(:user_id, :project_id, :assigned_id, :category, :content)
+      params.require(:task).permit(:user_id, :project_id, :assigned_id, :category_id, :content)
   end
 
 end

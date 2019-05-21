@@ -22,7 +22,6 @@ class MenuBar extends React.Component {
     this.props.openNewProjectModal();
   }
 
-  
   showProjectsBar() {
     return (
       <Menu id='project-menu-bar'>
@@ -89,7 +88,11 @@ class MenuBar extends React.Component {
         <Menu.Item onClick={this.showConfirmation}>
           <Icon name='trash alternate outline' />
         </Menu.Item>
-        <Confirm open={this.state.openConfirmation} onCancel={this.handleCancel} onConfirm={this.handleConfirm} />
+        <Confirm 
+          open={this.state.openConfirmation} 
+          onCancel={this.handleCancel} 
+          onConfirm={this.handleConfirm} 
+        />
       </Menu>
     )
   }

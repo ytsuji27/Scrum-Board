@@ -47,11 +47,6 @@ class NewProjectForm extends React.Component {
     }
   }
 
-
-
-
-
-
   render() {
     return (
       <Modal
