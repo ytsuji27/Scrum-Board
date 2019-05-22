@@ -17,7 +17,8 @@ class NewTaskForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      content: ''
+      content: '',
+      assigned_id: null
     }
   }
 
@@ -25,6 +26,9 @@ class NewTaskForm extends React.Component {
     this.setState({ [ev.target.name]: ev.target.value });
   }
 
+  // ########################### //
+  // ########## FETCH ########## //
+  // ########################### //
   postTask = () => {
     let { currentUser, currentProject, currentCategory } = this.props;
 
@@ -42,7 +46,8 @@ class NewTaskForm extends React.Component {
     .then(resp => resp.json())
     .then(data => {
       this.setState({
-        content: ''
+        content: '',
+        assigned_id: null
       })
       this.handleResponse(data);
     })
@@ -57,15 +62,56 @@ class NewTaskForm extends React.Component {
     }
   }
 
-  // createOptionsForDropdown = () => {
-  //   let options = [];
-  //   this.props.users.map(user => {
-  //     let userObj = {
+  // ########################### //
+  // ######## DROPDOWN ######### //
+  // ########################### //
+  handleAssignedChange = ev => {
+    let selectedUsername = ev.currentTarget.children[1].innerText;
+    if (selectedUsername !== 'Nobody') {
+      let selectedUser = this.props.users.find(user => {
+        return user.username === selectedUsername
+      })
+      this.setState({ assigned_id: selectedUser.id })
+    }
+  }
 
-  //     }
-  //   })
-  // }
+  createOptionsForDropdown = () => {
+    // Final options array. Include blank as option
+    let options = [
+      {
+        key: null,
+        text: '(Nobody)',
+        value: null,
+        image: { avatar: false }
+      }
+    ];
+    // Lookup table to associate avatar str in user w/ pic
+    let avatarChoice = {
+      'option1': option1,
+      'option2': option2,
+      'option3': option3,
+      'option4': option4,
+      'option5': option5,
+      'option6': option6,
+      'option7': option7,
+    }
+    // Map over users and create objects for dropdown
+    this.props.users.map(user => {
+      let avatarPic = avatarChoice[user.avatar]
+      let userObj = {
+        key: user.username,
+        text: user.username,
+        value: user.id,
+        image: { avatar: true, src: avatarPic }
+      }
+      return options.push(userObj);
+    })
+    return options;
+  }
 
+  // ########################### //
+  // ######### RENDER ########## //
+  // ########################### //
   render() {
     return (
       <Modal
@@ -93,11 +139,12 @@ class NewTaskForm extends React.Component {
               />
             </div>
             <Dropdown
-              placeholder='Assign task (optional) [UNDER CONSTRUCTION]'
+              placeholder='Assign task (optional)'
               fluid
               search
               selection
-              options={this.props.users}
+              options={this.createOptionsForDropdown()}
+              onChange={this.handleAssignedChange}
             />
             <Button color='blue' type='submit' onClick={this.postTask}>
               Create
