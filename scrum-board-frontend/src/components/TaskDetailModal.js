@@ -35,7 +35,7 @@ class TaskDetailModal extends React.Component {
         closeOnDimmerClick
         onClose={this.props.closeTaskDetailModal}
         id='task-detail-modal'
-        className='khaki'
+        className='khaki custom-font'
       >
         <Modal.Header className='khaki' id='task-detail-header'>
           <Menu className='khaki' id='task-detail-menu'>

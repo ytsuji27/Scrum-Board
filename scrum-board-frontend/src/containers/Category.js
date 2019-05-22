@@ -136,7 +136,7 @@ class Category extends React.Component {
       <Card id='category'>
         <Card.Content id='category-card-header'>
           <Card.Header>
-            <div id='category-name'>
+            <div id='category-name' className='custom-font'>
               {this.state.columnName}
             </div>
             <div id='category-option'>
@@ -155,6 +155,7 @@ class Category extends React.Component {
                 open={this.state.openConfirmation} 
                 onCancel={this.handleCancel} 
                 onConfirm={this.handleConfirm} 
+                content='Are you sure? All tasks in this column will be deleted'
               />
             </div>
           </Card.Header>
@@ -191,6 +192,7 @@ class Category extends React.Component {
             currentCategory={this.props.category}
             getToken={this.props.getToken}
             addTaskToState={this.props.addTaskToState}
+            users={this.props.users}
           />
         :
           null

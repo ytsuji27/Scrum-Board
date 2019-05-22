@@ -146,6 +146,7 @@ class CategoryContainer extends React.Component {
                currentUser={this.props.currentUser}
                addTaskToState={this.addTaskToState}
                removeTaskFromState={this.removeTaskFromState}
+               users={this.props.users}
              />
     })
   }

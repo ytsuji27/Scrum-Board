@@ -64,7 +64,7 @@ class TaskCard extends React.Component {
 
     return (
       <div>
-        <Card id='task-card' onClick={this.showTaskDetailModal}>
+        <Card id='task-card' className='custom-font' onClick={this.showTaskDetailModal}>
           <Card.Content>
             <Card.Description>{content}</Card.Description>
           </Card.Content>

@@ -12,21 +12,29 @@
 
 /* --- PROJECTS --- */
 #card {
-  margin: 20px;
+  /* POST-IT STYLE */
+  /* margin: 20px;
   width: 200px;
   height: 200px;
-  background-color: khaki;
-  /* background-image: url('../assets/images/13461.eps'); */
-  /* font-family: 'Nanum Pen Script', cursive; */
-  /* font-family: 'Gochi Hand', cursive; */
-  font-family: 'Coming Soon', cursive;
-  /* font-family: 'Short Stack', cursive; */
+  background-color: khaki; */
+
+  /* WHITEBOARD STYLE */
+  margin: 20px;
+  width: 250px;
+  height: 180px;
+  text-align: center;
+  padding-top: 40px;
+  background-image: url('../assets/images/13461.jpg');
+  background-position: center;
+  background-size: cover;
+  box-shadow: 0 0px 0px 0;
 }
 
-#card .header {
+.custom-font {
+  font-family: 'Coming Soon', cursive !important;
   /* font-family: 'Nanum Pen Script', cursive; */
   /* font-family: 'Gochi Hand', cursive; */
-  font-family: 'Coming Soon', cursive;
+  /* font-family: 'Coming Soon', cursive; */
   /* font-family: 'Short Stack', cursive; */
 }
 

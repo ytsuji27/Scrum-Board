@@ -92,6 +92,7 @@ class MenuBar extends React.Component {
           open={this.state.openConfirmation} 
           onCancel={this.handleCancel} 
           onConfirm={this.handleConfirm} 
+          content='Are you sure? All columns and tasks will be deleted'
         />
       </Menu>
     )

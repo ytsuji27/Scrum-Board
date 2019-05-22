@@ -3,6 +3,14 @@ import React from 'react';
 import { Button, Dropdown, Form, Modal } from "semantic-ui-react";
 //####### IMPORT MISC #######//
 import { TASKS_URL, HEADERBODY } from '../constants'
+//####### IMPORT IMAGES #######//
+import option1 from '../assets/avatar/Avatar (1).svg';
+import option2 from '../assets/avatar/Avatar (2).svg';
+import option3 from '../assets/avatar/Avatar (3).svg';
+import option4 from '../assets/avatar/Avatar (4).svg';
+import option5 from '../assets/avatar/Avatar (5).svg';
+import option6 from '../assets/avatar/Avatar (6).svg';
+import option7 from '../assets/avatar/Avatar (7).svg';
 
 class NewTaskForm extends React.Component {
 
@@ -49,6 +57,15 @@ class NewTaskForm extends React.Component {
     }
   }
 
+  // createOptionsForDropdown = () => {
+  //   let options = [];
+  //   this.props.users.map(user => {
+  //     let userObj = {
+
+  //     }
+  //   })
+  // }
+
   render() {
     return (
       <Modal
@@ -67,7 +84,7 @@ class NewTaskForm extends React.Component {
                 label='Content'
                 type='text'
                 name='content'
-                placeholder='content'
+                placeholder='Content'
                 value={this.state.content}
                 onChange={this.handleChange}
                 id='new-task-modal-content'
@@ -80,6 +97,7 @@ class NewTaskForm extends React.Component {
               fluid
               search
               selection
+              options={this.props.users}
             />
             <Button color='blue' type='submit' onClick={this.postTask}>
               Create
