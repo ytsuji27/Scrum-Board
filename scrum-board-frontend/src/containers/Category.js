@@ -166,7 +166,7 @@ class Category extends React.Component {
             getToken={this.props.getToken}
             removeTaskFromState={this.props.removeTaskFromState}
             addTaskToState={this.props.addTaskToState}
-            removeTaskFromState={this.props.removeTaskFromState}
+            users={this.props.users}
           />
         </Card.Content>
       </Card>

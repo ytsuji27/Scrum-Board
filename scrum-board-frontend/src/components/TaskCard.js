@@ -87,6 +87,7 @@ class TaskCard extends React.Component {
             closeTaskEditModal={this.closeTaskEditModal}
             editTask={this.editTask}
             task={this.props.task}
+            users={this.props.users}
           />
         :
           null

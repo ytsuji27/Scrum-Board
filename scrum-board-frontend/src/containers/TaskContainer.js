@@ -13,6 +13,7 @@ class TaskContainer extends React.Component {
                getToken={this.props.getToken}
                addTaskToState={this.props.addTaskToState}
                removeTaskFromState={this.props.removeTaskFromState}
+               users={this.props.users}
              />
     })
   }
