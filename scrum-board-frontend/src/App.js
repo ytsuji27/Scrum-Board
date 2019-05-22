@@ -8,7 +8,7 @@ import history from './history';
 import NewProjectForm from './components/NewProjectForm';
 //####### IMPORT MISC #######//
 import './App.css';
-import { PROFILE_URL, PROJECTS_URL } from './constants'
+import { PROFILE_URL, PROJECTS_URL, USERS_URL } from './constants'
 
 class App extends React.Component {
 
@@ -18,7 +18,8 @@ class App extends React.Component {
       currentUser: null,
       loggedIn: false,
       newProjectShow: false,
-      projects: []
+      projects: [],
+      users: []
     }
   }
 
@@ -40,6 +41,7 @@ class App extends React.Component {
       loggedIn: true
     })
     this.fetchProjects();
+    this.fetchUsers();
     // Redirects user to dashboard after successful login
     history.push('/');
   }
@@ -59,6 +61,7 @@ class App extends React.Component {
     if (this.getToken()) {
       this.fetchProfile();
       this.fetchProjects();
+      this.fetchUsers();
     }
   }
   
@@ -101,6 +104,20 @@ class App extends React.Component {
     })
     .then(resp => resp.json())
     .then(data => this.setCurrentUser(data.user))
+  }
+
+  fetchUsers = () => {
+    let token = this.getToken();
+    fetch(USERS_URL, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+    .then(resp => resp.json())
+    .then(data => {
+      this.setState({ users: data })
+    })
   }
 
   // Triggered by new Project POST request in NewProjectForm
@@ -158,6 +175,7 @@ class App extends React.Component {
                                                       deleteProject={this.deleteProject}
                                                       removeProjectFromState={this.removeProjectFromState}
                                                       addNewProject={this.addNewProject}
+                                                      users={this.state.users}
                                                     />
                                                   ))
                                         } 

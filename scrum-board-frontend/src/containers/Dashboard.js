@@ -56,6 +56,7 @@ class Dashboard extends React.Component {
         project={this.state.selectedProject}
         getToken={this.props.getToken}
         currentUser={this.props.currentUser}
+        users={this.props.users}
       />
     )
   }

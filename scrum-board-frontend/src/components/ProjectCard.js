@@ -9,9 +9,9 @@ class ProjectCard extends React.Component {
 
     return (
       <div>
-        <Card id="card" onClick={this.props.setSelectedProject}>
+        <Card id="card" className='custom-font' onClick={this.props.setSelectedProject}>
           <Card.Content>
-            <Card.Header>{name}</Card.Header>
+            <Card.Header className='custom-font'>{name}</Card.Header>
             <Card.Meta>Created by: {user.username}</Card.Meta>
             <Card.Description>{description}</Card.Description>
           </Card.Content>
