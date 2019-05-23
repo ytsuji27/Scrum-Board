@@ -109,6 +109,7 @@ class TaskEditModal extends React.Component {
                 />
               </div>
               <Dropdown
+                placeholder='Assign task (optional)'
                 fluid
                 search
                 selection

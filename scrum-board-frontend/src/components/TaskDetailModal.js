@@ -21,6 +21,7 @@ class TaskDetailModal extends React.Component {
       }
     })
     .then(resp => {
+      this.props.closeTaskDetailModal();
       this.props.removeTaskFromState(this.props.task)
     })
   }
