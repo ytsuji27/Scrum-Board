@@ -67,7 +67,7 @@ class NewTaskForm extends React.Component {
   // ########################### //
   handleAssignedChange = ev => {
     let selectedUsername = ev.currentTarget.children[1].innerText;
-    if (selectedUsername !== 'Nobody') {
+    if (selectedUsername !== '(Nobody)') {
       let selectedUser = this.props.users.find(user => {
         return user.username === selectedUsername
       })

@@ -1,12 +1,30 @@
 //####### IMPORT PACKAGES #######//
 import React from 'react';
-import { Card } from 'semantic-ui-react';
+import { Card, Image, Label, Popup } from 'semantic-ui-react';
 //####### IMPORT COMPONENTS #######//
 import TaskDetailModal from './TaskDetailModal';
 import TaskEditModal from './TaskEditModal';
 //####### IMPORT MISC #######//
 import { HEADERBODY, TASKS_URL } from '../constants';
 import '../styles/tasks.css';
+//####### IMPORT IMAGES #######//
+import option1 from '../assets/avatar/Avatar (1).svg';
+import option2 from '../assets/avatar/Avatar (2).svg';
+import option3 from '../assets/avatar/Avatar (3).svg';
+import option4 from '../assets/avatar/Avatar (4).svg';
+import option5 from '../assets/avatar/Avatar (5).svg';
+import option6 from '../assets/avatar/Avatar (6).svg';
+import option7 from '../assets/avatar/Avatar (7).svg';
+
+let avatarChoice = {
+  'option1': option1,
+  'option2': option2,
+  'option3': option3,
+  'option4': option4,
+  'option5': option5,
+  'option6': option6,
+  'option7': option7,
+}
 
 class TaskCard extends React.Component {
 
@@ -16,6 +34,18 @@ class TaskCard extends React.Component {
       showTaskDetailModal: false,
       showTaskEditModal: false
     }
+  }
+
+  getUser = id => {
+    let foundUser = this.props.users.find(user => {
+      return user.id === id
+    })
+    return foundUser
+  }
+
+  getAvatar = () => {
+    let foundUser = this.getUser(this.props.task.assigned_id)
+    return avatarChoice[foundUser.avatar];
   }
 
   // ########################### //
@@ -60,11 +90,32 @@ class TaskCard extends React.Component {
   // ######### RENDER ########## //
   // ########################### //
   render() {
-    let { content, user } = this.props.task;
+    let { content, user, assigned_id } = this.props.task;
 
     return (
       <div>
-        <Card id='task-card' className='custom-font' onClick={this.showTaskDetailModal}>
+        <Card 
+          id='task-card' 
+          className='custom-font' 
+          onClick={this.showTaskDetailModal}
+        >
+          {/* Add label if task is assigned */}
+          {assigned_id ? 
+            <Popup
+              id='task-avatar-popup'
+              header={this.getUser(assigned_id).username}
+              key={assigned_id}
+              size='mini'
+              trigger={
+                <Label floating circular id='task-card-avatar'>
+                  <Image avatar src={this.getAvatar()} /> 
+                </Label> 
+              }
+            />
+          : 
+            null
+          }
+
           <Card.Content>
             <Card.Description>{content}</Card.Description>
           </Card.Content>
