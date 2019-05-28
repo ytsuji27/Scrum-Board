@@ -13,7 +13,7 @@ class ProjectCard extends React.Component {
           <Card.Content>
             <Card.Header className='custom-font'>{name}</Card.Header>
             <Card.Meta>Created by: {user.username}</Card.Meta>
-            <Card.Description>{description}</Card.Description>
+            <Card.Description className='project-description'>{description}</Card.Description>
           </Card.Content>
         </Card>
       </div>

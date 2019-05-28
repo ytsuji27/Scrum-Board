@@ -59,6 +59,7 @@ class NewTaskForm extends React.Component {
     } else {
       this.props.closeNewTaskModal();
       this.props.addTaskToState(data);
+      this.props.addTaskToTaskIdsState(data, this.props.currentCategory);
     }
   }
 

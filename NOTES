@@ -1,3 +1,53 @@
-<Router>
-  <>
-    <Route exact path='/login' component={() => {<Login prop={prop} />}}
+react-beautiful-dnd
+
+EXAMPLE INITIAL-DATA FILE -----------------------------------------
+
+const initialData = {
+  tasks: {
+    'task-1': { id: 'task-1', content: 'Take out the garbage' },
+    'task-2': { id: 'task-2', content: 'Watch my favorite show' },
+    'task-3': { id: 'task-3', content: 'Charge my phone' },
+    'task-4': { id: 'task-4', content: 'Cook dinner' },
+  },
+  columns: {
+    'column-1': {
+      id: 'column-1',
+      title: 'To do',
+      taskIds: ['task-1', 'task-2', 'task-3', 'task-4']
+    }
+  },
+  // Facilitate reordering of the columns
+  columnOrder: ['column-1']
+}
+
+ACTUAL ------------------------------------------------------------
+
+task: {
+  id: 1,
+  user_id: 1,
+  project_id: 1,
+  category_id: 1,
+  assigned_id: 1,
+  content: 'string'
+}
+
+category: {
+  id: 1,
+  name: 'string',
+  project_id: 1,
+
+  -- ADD --
+  taskIds: []
+
+}
+
+project: {
+  id: 1,
+  name: 'string',
+  description: 'string',
+  user_id: 1,
+
+  -- ADD -- 
+  columnOrder: []
+
+}

@@ -28,6 +28,7 @@ class Dashboard extends React.Component {
   }
 
   setShowPageToProjects = () => {
+    this.props.fetchProjects();
     this.setState({ selectedProject: null })
   }
 

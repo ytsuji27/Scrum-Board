@@ -5,6 +5,7 @@ class CreateProjects < ActiveRecord::Migration[5.2]
       t.string :name
       t.text :description
       t.references :user, foreign_key: {on_delete: :cascade}
+      t.integer :columnOrder, array: true, default: []
       t.timestamps
     end
   end
