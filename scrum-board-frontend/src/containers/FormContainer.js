@@ -38,7 +38,7 @@ class FormContainer extends React.Component {
     }
 
     return(
-      <div>
+      <div className='form-container'>
         {showPage}
       </div>
     )

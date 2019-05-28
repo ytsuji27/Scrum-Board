@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 2019_05_14_214910) do
   create_table "categories", force: :cascade do |t|
     t.string "name"
     t.bigint "project_id"
+    t.integer "taskIds", default: [], array: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["project_id"], name: "index_categories_on_project_id"
@@ -27,6 +28,7 @@ ActiveRecord::Schema.define(version: 2019_05_14_214910) do
     t.string "name"
     t.text "description"
     t.bigint "user_id"
+    t.integer "columnOrder", default: [], array: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_projects_on_user_id"

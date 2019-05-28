@@ -1,6 +1,6 @@
 //####### IMPORT PACKAGES #######//
 import React from 'react';
-import { Form } from 'semantic-ui-react';
+import { Form, Header } from 'semantic-ui-react';
 //####### IMPORT MISC #######//
 import { LOGIN_URL, HEADERBODY } from '../constants.js'
 
@@ -50,7 +50,11 @@ class LoginForm extends React.Component {
   render() {
     return (
       <>
-        <Form onSubmit={this.handleSubmit}>
+        <Header as='h2' textAlign='center'>
+          Log in
+        </Header>
+        <Form onSubmit={this.handleSubmit} className='login-form'>
+          {/* <Form.Header>Log in</Form.Header> */}
           <Form.Input 
             label="Username"
             type="text" 
@@ -72,7 +76,7 @@ class LoginForm extends React.Component {
           <Form.Button>Login</Form.Button>
         </Form>
 
-        <div onClick={this.props.switchForm}>
+        <div onClick={this.props.switchForm} className='form-toggle-text'>
           Don't have an account yet? Click here to create one
         </div>
       </>

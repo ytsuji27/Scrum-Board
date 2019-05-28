@@ -12,7 +12,7 @@ class Api::V1::UserprojectController < ApplicationController
   private
 
   def userproject_params
-      params.require(:userproject).permit(:user, :project)
+      params.require(:userproject).permit(:user_id, :project_id)
   end
 
 end

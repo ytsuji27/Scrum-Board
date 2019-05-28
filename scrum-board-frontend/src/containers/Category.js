@@ -1,6 +1,7 @@
 //####### IMPORT PACKAGES #######//
 import React from 'react';
 import { Button, Card, Confirm, Dropdown, Form, Icon } from 'semantic-ui-react';
+import { Draggable } from 'react-beautiful-dnd';
 //####### IMPORT COMPONENTS #######//
 import TaskContainer from './TaskContainer';
 import NewTaskForm from '../components/NewTaskForm';
@@ -133,49 +134,67 @@ class Category extends React.Component {
   // ########################### //
   showCategoryCard() {
     return (
-      <Card id='category'>
-        <Card.Content id='category-card-header'>
-          <Card.Header>
-            <div id='category-name' className='custom-font'>
-              {this.state.columnName}
-            </div>
-            <div id='category-option'>
-              <Icon 
-                name='add' 
-                onClick={this.openNewTaskModal}
-              />
-              <Dropdown
-                trigger={this.trigger()}
-                options={this.options()}
-                pointing='top left'
-                icon={null}
-                onChange={this.handleOptionChange}
-              />    
-              <Confirm 
-                open={this.state.openConfirmation} 
-                onCancel={this.handleCancel} 
-                onConfirm={this.handleConfirm} 
-                content='Are you sure? All tasks in this column will be deleted'
-              />
-            </div>
-          </Card.Header>
-        </Card.Content>
-        <Card.Content>
-          <TaskContainer 
-            tasks={this.props.tasks} 
-            getToken={this.props.getToken}
-            removeTaskFromState={this.props.removeTaskFromState}
-            addTaskToState={this.props.addTaskToState}
-            users={this.props.users}
-          />
-        </Card.Content>
-      </Card>
+      <Draggable draggableId={this.props.category.id} index={this.props.index}>
+        {provided => (
+          <div
+            className='container'
+            {...provided.draggableProps}
+            ref={provided.innerRef}
+          >
+            <Card id='category'>
+              <Card.Content id='category-card-header'>
+                <Card.Header {...provided.dragHandleProps}>
+                  <div id='category-name' className='custom-font'>
+                    {this.state.columnName}
+                  </div>
+                  <div id='category-option'>
+                    <Icon 
+                      name='add' 
+                      onClick={this.openNewTaskModal}
+                    />
+                    <Dropdown
+                      trigger={this.trigger()}
+                      options={this.options()}
+                      pointing='top left'
+                      icon={null}
+                      onChange={this.handleOptionChange}
+                    />    
+                    <Confirm 
+                      open={this.state.openConfirmation} 
+                      onCancel={this.handleCancel} 
+                      onConfirm={this.handleConfirm} 
+                      content='Are you sure? All tasks in this column will be deleted'
+                    />
+                  </div>
+                </Card.Header>
+              </Card.Content>
+              <Card.Content>
+                <TaskContainer 
+                  category={this.props.category}
+                  tasks={this.props.tasks} 
+                  getToken={this.props.getToken}
+                  removeTaskFromState={this.props.removeTaskFromState}
+                  addTaskToState={this.props.addTaskToState}
+                  users={this.props.users}
+                  taskIds={this.props.category.taskIds}
+                  updateTaskInState={this.props.updateTaskInState}
+                  removeTaskFromTaskIdsState={this.props.removeTaskFromTaskIdsState}
+                />
+              </Card.Content>
+            </Card>
+          </div>
+        )}
+      </Draggable>
     )
   }
 
   // ########################### //
   // ######### RENDER ########## //
   // ########################### //
+  componentDidMount() {
+    this.setState({ taskIds: this.props.category.taskIds })
+  }
+
   render() {
     return (
       <>
@@ -193,6 +212,7 @@ class Category extends React.Component {
             getToken={this.props.getToken}
             addTaskToState={this.props.addTaskToState}
             users={this.props.users}
+            addTaskToTaskIdsState={this.props.addTaskToTaskIdsState}
           />
         :
           null

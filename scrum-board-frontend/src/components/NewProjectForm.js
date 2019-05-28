@@ -11,7 +11,8 @@ class NewProjectForm extends React.Component {
     super(props);
     this.state = {
       name: '',
-      description: ''
+      description: '',
+      columnOrder: []
     }
   }
 
@@ -23,12 +24,12 @@ class NewProjectForm extends React.Component {
     let currentuser = this.props.currentUser;
     let token = this.props.getToken();
     let body = {
-      user: currentuser,
-      project: newProject
+      user_id: currentuser.id,
+      project_id: newProject.id
     }
     fetch(USERPROJECTS_URL, {
       method: 'POST',
-      header: {...HEADERBODY, Authorization: `Bearer ${token}`},
+      headers: {...HEADERBODY, Authorization: `Bearer ${token}`},
       body: JSON.stringify(body)
     })
     .then(resp => resp.json())
@@ -48,10 +49,11 @@ class NewProjectForm extends React.Component {
     .then(data => {
       this.setState({
         name: '',
-        description: ''
+        description: '',
+        columnOrder: []
       })
       this.handleResponse(data);
-      // this.postToProjectUsers(data);
+      this.postToProjectUsers(data);
     })
   }
 

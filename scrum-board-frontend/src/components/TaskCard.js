@@ -1,6 +1,7 @@
 //####### IMPORT PACKAGES #######//
 import React from 'react';
 import { Card, Image, Label, Popup } from 'semantic-ui-react';
+import { Draggable } from 'react-beautiful-dnd';
 //####### IMPORT COMPONENTS #######//
 import TaskDetailModal from './TaskDetailModal';
 import TaskEditModal from './TaskEditModal';
@@ -62,8 +63,7 @@ class TaskCard extends React.Component {
     .then(resp => resp.json())
     .then(data => {
       console.log(data)
-      this.props.removeTaskFromState(this.props.task)
-      this.props.addTaskToState(data)
+      this.props.updateTaskInState(data)
     })
   }
 
@@ -90,36 +90,47 @@ class TaskCard extends React.Component {
   // ######### RENDER ########## //
   // ########################### //
   render() {
-    let { content, user, assigned_id } = this.props.task;
+    let { id, content, user, assigned_id } = this.props.task;
 
     return (
       <div>
-        <Card 
-          id='task-card' 
-          className='custom-font' 
-          onClick={this.showTaskDetailModal}
-        >
-          {/* Add label if task is assigned */}
-          {assigned_id ? 
-            <Popup
-              id='task-avatar-popup'
-              header={this.getUser(assigned_id).username}
-              key={assigned_id}
-              size='mini'
-              trigger={
-                <Label floating circular id='task-card-avatar'>
-                  <Image avatar src={this.getAvatar()} /> 
-                </Label> 
-              }
-            />
-          : 
-            null
-          }
+        <Draggable draggableId={id} index={this.props.index}>
+          {provided => (
+            <div
+              className='dnd-container'
+              {...provided.draggableProps}
+              {...provided.dragHandleProps}
+              ref={provided.innerRef}
+            >
+              <Card 
+                id='task-card' 
+                className='custom-font' 
+                onClick={this.showTaskDetailModal}
+              >
+                {/* Add label if task is assigned */}
+                {assigned_id ? 
+                  <Popup
+                    id='task-avatar-popup'
+                    header={this.getUser(assigned_id).username}
+                    key={assigned_id}
+                    size='mini'
+                    trigger={
+                      <Label floating circular id='task-card-avatar'>
+                        <Image avatar src={this.getAvatar()} /> 
+                      </Label> 
+                    }
+                  />
+                : 
+                  null
+                }
 
-          <Card.Content>
-            <Card.Description>{content}</Card.Description>
-          </Card.Content>
-        </Card>
+                <Card.Content>
+                  <Card.Description>{content}</Card.Description>
+                </Card.Content>
+              </Card>
+            </div>
+          )}
+        </Draggable>
 
         {this.state.showTaskDetailModal === true ?
           <TaskDetailModal
@@ -128,6 +139,7 @@ class TaskCard extends React.Component {
             getToken={this.props.getToken}
             removeTaskFromState={this.props.removeTaskFromState}
             showTaskEditModal={this.showTaskEditModal}
+            removeTaskFromTaskIdsState={this.props.removeTaskFromTaskIdsState}
           />
         :
           null

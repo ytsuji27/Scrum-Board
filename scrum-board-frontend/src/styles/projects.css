@@ -28,6 +28,13 @@
   background-position: center;
   background-size: cover;
   box-shadow: 0 0px 0px 0;
+  overflow-wrap: normal;
+}
+
+.project-description {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  padding: 0 7px;
 }
 
 .custom-font {

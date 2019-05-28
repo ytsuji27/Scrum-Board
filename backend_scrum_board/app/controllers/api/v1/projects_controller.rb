@@ -29,7 +29,7 @@ class Api::V1::ProjectsController < ApplicationController
   private
 
   def project_params
-      params.require(:project).permit(:name, :description, :user_id)
+      params.require(:project).permit(:name, :description, :user_id, :columnOrder => [])
   end
 
 end

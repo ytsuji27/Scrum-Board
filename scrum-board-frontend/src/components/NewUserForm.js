@@ -1,6 +1,6 @@
 //####### IMPORT PACKAGES #######//
 import React from 'react';
-import { Form } from 'semantic-ui-react';
+import { Form, Header } from 'semantic-ui-react';
 //####### IMPORT IMAGES #######//
 import option1 from '../assets/avatar/Avatar (1).svg';
 import option2 from '../assets/avatar/Avatar (2).svg';
@@ -65,6 +65,9 @@ class NewUserForm extends React.Component {
   render() {
     return (
       <>
+        <Header as='h2' textAlign='center'>
+          Create an account
+        </Header>
         <Form onSubmit={this.handleSubmit}>
           <Form.Input 
             label="Username"
@@ -84,8 +87,8 @@ class NewUserForm extends React.Component {
             onChange={this.handleChange}
             required
           />
+          <label className='avatar-label'>Select an avatar</label>
           <Form.Group id='radioGroup'>
-            <label>Select an avatar</label>
             <label id='avatar'>
               <input
                 id='option1'
@@ -175,7 +178,7 @@ class NewUserForm extends React.Component {
           <Form.Button>Create Account</Form.Button>
         </Form>
 
-        <div onClick={this.props.switchForm}>
+        <div onClick={this.props.switchForm} className='form-toggle-text'>
           Have an account already? Click here to log in
         </div>
       </>

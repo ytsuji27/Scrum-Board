@@ -36,6 +36,11 @@
   margin: 10px;
   flex: 0 0 auto;
   width: 270px;
+  min-height: 270px;
+  /* react-beautiful-dnd */
+  /* width: 135px; */
+  display: flex;
+  flex-direction: column;
 }
 
 /* --- CATEGORY CARD --- */
@@ -49,6 +54,27 @@
 }
 
 #category-card-header {
-  /* height: 47px; */
+  height: 47px;
   /* NOT WORKING */
+}
+
+.task-list {
+  flex-grow: 1;
+  min-height: 250px;
+}
+
+#skyblue {
+  background-color: skyblue;
+}
+
+.content {
+  flex-grow: 0 !important;
+}
+
+.dnd-container {
+
+}
+
+.categories-container-minus-add-button {
+  display: flex;
 }

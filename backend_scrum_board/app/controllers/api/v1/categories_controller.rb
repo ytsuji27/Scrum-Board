@@ -30,7 +30,7 @@ class Api::V1::CategoriesController < ApplicationController
   private
 
   def category_params
-    params.require(:category).permit(:name, :project_id)
+    params.require(:category).permit(:name, :project_id, :taskIds => [])
   end
   
 end

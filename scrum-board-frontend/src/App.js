@@ -176,6 +176,7 @@ class App extends React.Component {
                                                       removeProjectFromState={this.removeProjectFromState}
                                                       addNewProject={this.addNewProject}
                                                       users={this.state.users}
+                                                      fetchProjects={this.fetchProjects}
                                                     />
                                                   ))
                                         } 

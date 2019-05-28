@@ -4,7 +4,9 @@
   width: 100px;
   height: 100px;
   background-color: khaki;
-  float: left;
+
+  /* NOTE: Enable for multi column category div */
+  /* float: left; */
 }
 
 #task-detail-modal {

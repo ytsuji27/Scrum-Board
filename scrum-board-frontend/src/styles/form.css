@@ -24,6 +24,14 @@ input[type='radio']:checked + label .avatar-img {
   opacity: 1.0;
 }
 
+.avatar-label {
+  font-weight: 700;
+}
+
+#radioGroup {
+  height: 80px;
+}
+
 /* --- NEW PROJECT FORM --- */
 #new-project-modal {
   width: 400px;
