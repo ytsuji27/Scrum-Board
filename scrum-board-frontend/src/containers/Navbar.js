@@ -75,7 +75,7 @@ class Navbar extends React.Component {
         <Menu inverted secondary>
         
           <Menu.Item>
-            <img src={logo} alt="logo" />
+            <img src={logo} alt="logo" />Yutrello
           </Menu.Item>
 
           <Menu.Menu position='right'>

@@ -5,9 +5,18 @@
   margin: 20px !important;
 }
 
+.profile-header-h3 {
+  margin-left: 20px !important; 
+  margin-bottom: 0px !important;
+}
 .profile-page-message {
   margin: 20px !important;
   font-style: italic;
+}
+
+.profile-text {
+  margin-left: 20px !important;
+  margin-top: 0px !important;
 }
 
 /* --- PROJECT CARD --- */

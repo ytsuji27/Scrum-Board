@@ -112,9 +112,10 @@ class Profile extends React.Component {
           Username: {username}
         </Header>
 
-        <Header as='h3' className='profile-header'>
+        <Header as='h3' className='profile-header-h3'>
           Here are all the projects you are on and tasks assigned to you
         </Header>
+        <p className='profile-text'>Clicking on a project will take you to that project</p>
         {this.props.allOfUsersProjects.length !== 0 ? 
           this.showProjectCards() : 
           this.noProjectsMessage()
