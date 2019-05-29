@@ -147,7 +147,7 @@ class NewTaskForm extends React.Component {
               options={this.createOptionsForDropdown()}
               onChange={this.handleAssignedChange}
             />
-            <Button color='blue' type='submit' onClick={this.postTask}>
+            <Button color='blue' id='task-button' type='submit' onClick={this.postTask}>
               Create
             </Button>
           </Form>

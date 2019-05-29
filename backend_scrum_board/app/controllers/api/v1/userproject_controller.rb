@@ -1,5 +1,10 @@
 class Api::V1::UserprojectController < ApplicationController
 
+  def index
+    @userproject = UserProject.all
+    render json: @userproject
+  end
+
   def create
     @userproject = UserProject.create(userproject_params)
     if @userproject.valid?

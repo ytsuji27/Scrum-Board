@@ -1,12 +1,29 @@
 /* --- TASK CARD --- */
 #task-card {
   margin: 10px;
-  width: 100px;
+  width: 220px;
   height: 100px;
   background-color: khaki;
 
   /* NOTE: Enable for multi column category div */
   /* float: left; */
+}
+
+.task-content-wrapper {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  overflow-wrap: break-word;
+}
+
+.task-content {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  overflow-wrap: break-word;
+  text-overflow: ellipsis;
 }
 
 #task-detail-modal {
@@ -31,4 +48,8 @@
   background-color: transparent;
   height: 40px;
   width: 40px;
+}
+
+#task-button {
+  margin: 10px 0;
 }

@@ -3,7 +3,7 @@ import React from 'react';
 import { Form, Button, Modal } from "semantic-ui-react";
 //####### IMPORT MISC #######//
 import '../styles/form.css';
-import { PROJECTS_URL, HEADERBODY, USERPROJECTS_URL } from '../constants'
+import { PROJECTS_URL, HEADERBODY } from '../constants'
 
 class NewProjectForm extends React.Component {
 
@@ -18,22 +18,6 @@ class NewProjectForm extends React.Component {
 
   handleChange = ev => {
     this.setState({ [ev.target.name]: ev.target.value });
-  }
-
-  postToProjectUsers = newProject => {
-    let currentuser = this.props.currentUser;
-    let token = this.props.getToken();
-    let body = {
-      user_id: currentuser.id,
-      project_id: newProject.id
-    }
-    fetch(USERPROJECTS_URL, {
-      method: 'POST',
-      headers: {...HEADERBODY, Authorization: `Bearer ${token}`},
-      body: JSON.stringify(body)
-    })
-    .then(resp => resp.json())
-    .then(data => console.log(data))
   }
 
   postProject = () => {
@@ -53,7 +37,7 @@ class NewProjectForm extends React.Component {
         columnOrder: []
       })
       this.handleResponse(data);
-      this.postToProjectUsers(data);
+      this.props.postToProjectUsers(data, this.props.currentUser);
     })
   }
 

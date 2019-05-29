@@ -90,7 +90,7 @@ class TaskCard extends React.Component {
   // ######### RENDER ########## //
   // ########################### //
   render() {
-    let { id, content, user, assigned_id } = this.props.task;
+    let { id, content, assigned_id } = this.props.task;
 
     return (
       <div>
@@ -124,8 +124,8 @@ class TaskCard extends React.Component {
                   null
                 }
 
-                <Card.Content>
-                  <Card.Description>{content}</Card.Description>
+                <Card.Content className='task-content-wrapper'>
+                  <Card.Description className='task-content'>{content}</Card.Description>
                 </Card.Content>
               </Card>
             </div>

@@ -2,7 +2,7 @@
 import React from 'react';
 import { Button, Dropdown, Form, Modal } from "semantic-ui-react";
 //####### IMPORT MISC #######//
-import { TASKS_URL, HEADERBODY } from '../constants'
+// import { TASKS_URL, HEADERBODY } from '../constants'
 //####### IMPORT IMAGES #######//
 import option1 from '../assets/avatar/Avatar (1).svg';
 import option2 from '../assets/avatar/Avatar (2).svg';

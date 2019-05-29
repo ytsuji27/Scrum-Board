@@ -51,3 +51,29 @@
   text-align: center;
   cursor: pointer;
 }
+
+/* --- ADD USER MODAL --- */
+#add-user-modal {
+  width: 300px;
+}
+
+#add-user-button {
+  margin: 10px 0;
+}
+
+/* --- PROJECT AVATAR --- */
+#project-avatar {
+  margin-left: -25px;
+  position: relative;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  overflow: hidden;
+  width: 40px;
+  height: 40px;
+}
+
+#avatar-container {
+  display: inline-flex;
+  flex-direction: row-reverse;
+  padding-left: 50px;
+}

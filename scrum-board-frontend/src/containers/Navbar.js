@@ -15,6 +15,13 @@ import '../styles/navbar.css';
 
 class Navbar extends React.Component {
 
+  constructor(props){
+    super(props);
+    this.state = {
+      selectedOption: null
+    }
+  }
+
   // Used in the profile dropdown
   trigger = () => {
     let avatarChoice = {
@@ -42,16 +49,23 @@ class Navbar extends React.Component {
   // Used in the profile dropdown [dropdown options]
   options() {
     return [
-      { key: 'user', text: 'Profile', icon: 'user' },
-      { key: 'sign-out', text: 'Log Out', icon: 'sign out' }
+      { key: 'user', text: 'Profile', icon: 'user', value: 'user' },
+      { key: 'sign-out', text: 'Log Out', icon: 'sign out', value: 'sign-out' }
     ]
   }
 
   // Handles choice from dropdown menu
-  handleChange = ev => {
-    let choice = ev.currentTarget.children[1].textContent
-    if (choice === 'Log Out') {
-      this.props.logout();
+  handleChange = (ev, { value }) => {
+    let choice = ev.currentTarget.children[1].textContent;
+    if (choice === 'Profile' || choice === 'Log Out') {
+      this.setState({ selectedOption: value })
+      if (choice === 'Log Out') {
+        this.props.logout();
+      } else if (choice === 'Profile') {
+        this.props.setProfilePage();
+      }
+      // Reset dropdown
+      this.setState({ selectedOption: null })
     }
   }
 
@@ -72,6 +86,7 @@ class Navbar extends React.Component {
               icon={null} 
               className='profile-avatar'
               onChange={this.handleChange}
+              value={this.state.selectedOption}
             />
           </Menu.Menu>
         </Menu>

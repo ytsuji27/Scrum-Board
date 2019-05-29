@@ -8,7 +8,7 @@ import history from './history';
 import NewProjectForm from './components/NewProjectForm';
 //####### IMPORT MISC #######//
 import './App.css';
-import { PROFILE_URL, PROJECTS_URL, USERS_URL } from './constants'
+import { HEADERBODY, PROFILE_URL, PROJECTS_URL, USERS_URL, USERPROJECTS_URL } from './constants'
 
 class App extends React.Component {
 
@@ -18,8 +18,10 @@ class App extends React.Component {
       currentUser: null,
       loggedIn: false,
       newProjectShow: false,
-      projects: [],
-      users: []
+      allProjects: [],
+      users: [],
+      userProjects: [],
+      allOfUsersProjects: []
     }
   }
 
@@ -40,8 +42,8 @@ class App extends React.Component {
       currentUser: user,
       loggedIn: true
     })
-    this.fetchProjects();
     this.fetchUsers();
+    this.comboFetch();
     // Redirects user to dashboard after successful login
     history.push('/');
   }
@@ -51,7 +53,10 @@ class App extends React.Component {
       currentUser: null,
       loggedIn: false,
       newProjectShow: false,
-      projects: []
+      allProjects: [],
+      users: [],
+      userProjects: [],
+      allOfUsersProjects: []
     })
     localStorage.removeItem('jwt')
   }
@@ -60,11 +65,39 @@ class App extends React.Component {
   componentDidMount() {
     if (this.getToken()) {
       this.fetchProfile();
-      this.fetchProjects();
       this.fetchUsers();
+      this.comboFetch();
     }
   }
   
+  comboFetch = () => {
+    let token = this.getToken();
+    Promise.all([
+      fetch(PROJECTS_URL, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }),
+      fetch(USERPROJECTS_URL, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+    ])
+    .then(([res1, res2]) => Promise.all([res1.json(), res2.json()]))
+    .then(([data1, data2]) => {
+      let projects = data2.filter(userproject => {
+        return userproject.user_id === this.state.currentUser.id;
+      })
+      let finalProjects = projects.map(project => {
+        return data1.find(stateProject => stateProject.id === project.project_id)
+      })
+      console.log(finalProjects)
+      this.setState({ allProjects: data1, userProjects: data2, allOfUsersProjects: finalProjects })
+    })
+  }
   // ########################### //
   // ####### MODAL STUFF ####### //
   // ########################### //
@@ -90,7 +123,14 @@ class App extends React.Component {
     })
     .then(resp => resp.json())
     .then(data => {
-      this.setState({ projects: data })
+      let projects = this.state.userProjects.filter(userproject => {
+        return userproject.user_id === this.state.currentUser.id;
+      })
+      let finalProjects = projects.map(project => {
+        return data.find(stateProject => stateProject.id === project.project_id)
+      })
+      
+      this.setState({ allProjects: data, allOfUsersProjects: finalProjects })
     })
   }
 
@@ -120,10 +160,44 @@ class App extends React.Component {
     })
   }
 
+  postToProjectUsers = (project, user) => {
+    let token = this.getToken();
+    let body = {
+      user_id: user.id,
+      project_id: project.id
+    }
+    fetch(USERPROJECTS_URL, {
+      method: 'POST',
+      headers: {...HEADERBODY, Authorization: `Bearer ${token}`},
+      body: JSON.stringify(body)
+    })
+    // .then(resp => resp.json())
+    // .then(data => console.log(data))
+  }
+
+  fetchProjectUsers() {
+    let token = this.getToken();
+    fetch(USERPROJECTS_URL, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+    .then(resp => resp.json())
+    .then(data => this.setState({ userProjects: data }))
+  }
+
   // Triggered by new Project POST request in NewProjectForm
   addNewProject = project => {
-    let newProjects = [...this.state.projects, project]
-    this.setState({ projects: newProjects })
+    let newProjects = [...this.state.allProjects, project]
+    let newProjectUser = { user_id: this.state.currentUser.id, project_id: project.id }
+    let newProjectUsers = [...this.state.userProjects, newProjectUser]
+    let newAllOfUsersProjects = [...this.state.allOfUsersProjects, project]
+    this.setState({ 
+      allProjects: newProjects, 
+      userProjects: newProjectUsers, 
+      allOfUsersProjects: newAllOfUsersProjects
+    })
   }
 
   // Triggered from MenuBar
@@ -140,10 +214,13 @@ class App extends React.Component {
 
   // Removes deleted project from state, so dash updates on delete
   removeProjectFromState = deleteThisProject => {
-    let newProjectsArray = this.state.projects.filter(project => {
+    let newProjectsArray = this.state.allProjects.filter(project => {
       return project.id !== deleteThisProject.id;
     })
-    this.setState({ projects: newProjectsArray })
+    let newAllOfUsersProjects = this.state.allOfUsersProjects.filter(project => {
+      return project.id !== deleteThisProject.id;
+    })
+    this.setState({ allProjects: newProjectsArray, allOfUsersProjects: newAllOfUsersProjects })
   }
 
   // ########################### //
@@ -171,12 +248,15 @@ class App extends React.Component {
                                                       logout={this.logout}
                                                       currentUser={this.state.currentUser}
                                                       openNewProjectModal={this.openNewProjectModal}
-                                                      projects={this.state.projects}
+                                                      projects={this.state.allOfUsersProjects}
                                                       deleteProject={this.deleteProject}
                                                       removeProjectFromState={this.removeProjectFromState}
                                                       addNewProject={this.addNewProject}
                                                       users={this.state.users}
                                                       fetchProjects={this.fetchProjects}
+                                                      postToProjectUsers={this.postToProjectUsers}
+                                                      userProjects={this.state.userProjects}
+                                                      allOfUsersProjects={this.state.allOfUsersProjects}
                                                     />
                                                   ))
                                         } 
@@ -187,6 +267,7 @@ class App extends React.Component {
               currentUser={this.state.currentUser}
               getToken={this.getToken}
               addNewProject={this.addNewProject}
+              postToProjectUsers={this.postToProjectUsers}
             /> 
             : null
           }

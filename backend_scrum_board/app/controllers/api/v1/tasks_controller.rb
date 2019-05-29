@@ -2,7 +2,7 @@ class Api::V1::TasksController < ApplicationController
 
   # Gets all tasks assigned to current user
   def index
-    @tasks = Task.where(user_id: current_user.id)
+    @tasks = Task.where(assigned_id: current_user.id)
     render json: @tasks
   end
 
