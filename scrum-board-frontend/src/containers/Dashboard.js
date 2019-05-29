@@ -164,7 +164,9 @@ class Dashboard extends React.Component {
   postUserProject = ev => {
     let choice = ev.currentTarget.parentElement.firstElementChild.innerText;
     let user = this.props.users.find(user => user.username === choice);
-    this.props.postToProjectUsers(this.state.selectedProject, user)
+    this.props.postToProjectUsers(this.state.selectedProject, user);
+    let newProjectUsers = [...this.state.projectUsers, user]
+    this.setState({ projectUsers: newProjectUsers })
     this.closeAddUserModal();
   }
 
@@ -242,6 +244,7 @@ class Dashboard extends React.Component {
           postToProjectUsers={this.props.postToProjectUsers}
           openAddUserModal={this.openAddUserModal}
           usersOnProject={this.state.projectUsers}
+          currentUser={this.props.currentUser}
         />
         {/* CONDITIONALLY RENDER PAGES */}
         {/* Show Project page */}

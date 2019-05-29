@@ -102,7 +102,22 @@ class MenuBar extends React.Component {
     }
   }
 
+  // Only shows edit and delete function if user created project
+  showProjectControl = () => {
+    return (
+      <>
+        <Menu.Item onClick={this.handleProjectEditClick}>
+          <Icon name='edit' />
+        </Menu.Item>
+        <Menu.Item onClick={this.showConfirmation}>
+          <Icon name='trash alternate outline' />
+        </Menu.Item>
+      </>
+    )
+  }
+
   showProjectTitleBar() {
+    
     return (
       <Menu id='project-menu-bar'>
         <Menu.Item onClick={this.goBackToProjects}>
@@ -110,25 +125,27 @@ class MenuBar extends React.Component {
         </Menu.Item>
         <Menu.Item header>{this.props.selectedProject.name}</Menu.Item>
         <Menu.Item>{this.props.selectedProject.description}</Menu.Item>
+
         <Menu.Item id='avatar-container'>
           {this.props.usersOnProject.map(user => (
             <Popup
-              key={user.id}
-              content={user.username}
-              trigger={<Image src={avatarChoice[user.avatar]} avatar id={this.setId()} />}
+            key={user.id}
+            content={user.username}
+            trigger={<Image src={avatarChoice[user.avatar]} avatar id={this.setId()} />}
             />
-          ))}
+            ))}
         </Menu.Item>
 
-        <Menu.Item position='right' onClick={this.handleProjectEditClick}>
-          <Icon name='edit' />
-        </Menu.Item>
-        <Menu.Item onClick={this.showConfirmation}>
-          <Icon name='trash alternate outline' />
-        </Menu.Item>
-        <Menu.Item onClick={this.handleAddUser}>
+        <Menu.Item position='right' onClick={this.handleAddUser}>
           <Icon name='user plus'/>
         </Menu.Item>
+        
+        {this.props.currentUser.id === this.props.selectedProject.user.id ? 
+          this.showProjectControl()
+        :
+          null
+        }
+        
         <Confirm 
           open={this.state.openConfirmation} 
           onCancel={this.handleCancel} 

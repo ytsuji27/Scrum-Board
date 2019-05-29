@@ -115,8 +115,9 @@ class TaskEditModal extends React.Component {
                 selection
                 options={this.createOptionsForDropdown()}
                 onChange={this.handleAssignedChange}
+                value={this.state.assigned_id}
               />
-              <Button color='blue' type='submit' onClick={this.submitEdit}>
+              <Button id='task-button' color='blue' type='submit' onClick={this.submitEdit}>
                 Edit
               </Button>
             </Form>

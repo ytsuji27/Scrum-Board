@@ -94,7 +94,6 @@ class App extends React.Component {
       let finalProjects = projects.map(project => {
         return data1.find(stateProject => stateProject.id === project.project_id)
       })
-      console.log(finalProjects)
       this.setState({ allProjects: data1, userProjects: data2, allOfUsersProjects: finalProjects })
     })
   }
