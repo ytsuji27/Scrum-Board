@@ -17,7 +17,8 @@ class Category extends React.Component {
       showEditForm: false,
       columnName: this.props.category.name,
       showNewTaskForm: false,
-      openConfirmation: false
+      openConfirmation: false,
+      selectedOption: null
     }
   }
 
@@ -37,8 +38,8 @@ class Category extends React.Component {
 
   options = () => {
     return [
-      { key: 'edit', text: 'Edit', icon: 'edit' },
-      { key: 'delete', text: 'Delete', icon: 'trash alternate outline' }
+      { key: 'edit', text: 'Edit', icon: 'edit', value: 'edit'},
+      { key: 'delete', text: 'Delete', icon: 'trash alternate outline', value: 'delete' }
     ]
   }
 
@@ -56,15 +57,15 @@ class Category extends React.Component {
   // ########################### //
   // ######## EDIT FORM ######## //
   // ########################### //
-  handleOptionChange = ev => {
-    let choice = ev.currentTarget.children[1].textContent
-    console.log(choice)
-    if (choice === 'Edit') {
+  handleOptionChange = (ev, { value }) => {
+    this.setState({ selectedOption: value })
+    if (value === 'edit') {
       this.setState({ showEditForm: true })
-    } else {
+    } else if (value === 'delete') {
       this.showConfirmation();
-      // this.props.deleteCategory(this.props.category);
     }
+    // Reset dropdown
+    this.setState({ selectedOption: null })
   }
   
   handleFormChange = ev => {
@@ -158,6 +159,7 @@ class Category extends React.Component {
                       pointing='top left'
                       icon={null}
                       onChange={this.handleOptionChange}
+                      value={this.state.selectedOption}
                     />    
                     <Confirm 
                       open={this.state.openConfirmation} 

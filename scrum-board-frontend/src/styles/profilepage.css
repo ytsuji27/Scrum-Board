@@ -1,0 +1,37 @@
+/* --- PROFILE PAGE --- */
+
+/* --- HEADER --- */
+.profile-header {
+  margin: 20px !important;
+}
+
+.profile-page-message {
+  margin: 20px !important;
+  font-style: italic;
+}
+
+/* --- PROJECT CARD --- */
+.project-card {
+  float: left;
+  margin: 20px !important;
+  width: 270px;
+}
+
+.profile-page-project-card-header {
+  cursor: pointer;
+}
+
+/* --- TASK CARDS --- */
+#profile-page-task-card {
+  margin: 10px;
+  width: 100px;
+  height: 100px;
+  background-color: khaki;
+  float: left;
+
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  overflow-wrap: break-word;
+}

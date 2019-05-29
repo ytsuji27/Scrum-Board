@@ -1,11 +1,35 @@
 //####### IMPORT PACKAGES #######//
 import React from 'react';
-import { Form, Button, Icon, Menu, Modal } from "semantic-ui-react";
+import { Confirm, Icon, Menu, Modal } from "semantic-ui-react";
 //####### IMPORT MISC #######//
 import '../styles/tasks.css';
 import { TASKS_URL } from '../constants';
 
 class TaskDetailModal extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      openConfirmation: false
+    }
+  }
+
+  // ########################### //
+  // ####### CONFIRMATION ###### //
+  // ########################### //
+
+  showConfirmation = () => {
+    this.setState({ openConfirmation: true })
+  }
+
+  handleCancel = () => {
+    this.setState({ openConfirmation: false })
+  }
+
+  handleConfirm = () => {
+    this.setState({ openConfirmation: false })
+    this.deleteTask();
+  }
 
   editTask = () => {
     this.props.closeTaskDetailModal();
@@ -27,8 +51,12 @@ class TaskDetailModal extends React.Component {
     })
   }
 
+  // ########################### //
+  // ########## RENDER ######### //
+  // ########################### //
+
   render() {
-    let { assigned, category, content, user } = this.props.task
+    let { assigned, content, user } = this.props.task
 
     return (
       <Modal
@@ -44,7 +72,7 @@ class TaskDetailModal extends React.Component {
             <Menu.Item position='right' onClick={this.editTask}>
               <Icon name='edit' />
             </Menu.Item>
-            <Menu.Item onClick={this.deleteTask}>
+            <Menu.Item onClick={this.showConfirmation}>
               <Icon name='trash alternate outline' />
             </Menu.Item>
           </Menu>
@@ -56,6 +84,12 @@ class TaskDetailModal extends React.Component {
             <p>Assigned to: {assigned ? assigned.username : 'Nobody yet'}</p>
           </Modal.Description>
         </Modal.Content>
+        <Confirm 
+          open={this.state.openConfirmation} 
+          onCancel={this.handleCancel} 
+          onConfirm={this.handleConfirm} 
+          content='Are you sure?'
+        />
       </Modal>
     )
   }

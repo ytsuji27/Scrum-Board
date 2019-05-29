@@ -39,8 +39,8 @@ class TaskContainer extends React.Component {
   render() {
     return (
       <>
-        {/* {this.props.tasks.length !== 0 ? this.showTasks() : null} */}
-        {this.showTasks()}
+        {this.props.tasks.length !== 0 ? this.showTasks() : null}
+        {/* {this.showTasks()} */}
       </>
     )
   }

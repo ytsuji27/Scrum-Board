@@ -168,17 +168,16 @@ class CategoryContainer extends React.Component {
   // ########################### //
 
   // Filters out tasks based on category passed in
-  getTasks = category => {
-    let tasks = this.state.tasks.filter(task => {
-      return task.category.id === category.id
-    })
-    return tasks;
-  }
+  // getTasks = category => {
+  //   let tasks = this.state.tasks.filter(task => {
+  //     return task.category.id === category.id
+  //   })
+  //   return tasks;
+  // }
 
   onDragEnd = result => {
     // TO DO reorder column
     const { destination, source, draggableId, type } = result;
-    console.log(type)
     // Does nothing if object is dropped outside
     if (!destination) {
       return;
@@ -264,14 +263,14 @@ class CategoryContainer extends React.Component {
 
   patchTask = (patchTaskId, newCategory) => {
     let token = this.props.getToken();
-    let patchThisTask = this.state.tasks.find(task => task.id === patchTaskId);
+    // let patchThisTask = this.state.tasks.find(task => task.id === patchTaskId);
     fetch(TASKS_URL + `/${patchTaskId}`, {
       method: 'PATCH',
       headers: {...HEADERBODY, Authorization: `Bearer ${token}`},
       body: JSON.stringify({ category_id: newCategory.id })
     })
-    .then(resp => resp.json())
-    .then(data => console.log(data))
+    // .then(resp => resp.json())
+    // .then(data => console.log(data))
   }
 
   patchCategory = patchCategory => {
@@ -282,8 +281,8 @@ class CategoryContainer extends React.Component {
       headers: {...HEADERBODY, Authorization: `Bearer ${token}`},
       body: JSON.stringify({ taskIds: patchThisCategory[0].taskIds })
     })
-    .then(resp => resp.json())
-    .then(data => console.log(data))
+    // .then(resp => resp.json())
+    // .then(data => console.log(data))
   }
 
   showCategories = () => {
@@ -306,7 +305,7 @@ class CategoryContainer extends React.Component {
                   category={category} 
                   key={category.id}
                   index={index} 
-                  tasks={this.getTasks(category)} 
+                  tasks={this.state.tasks} 
                   getToken={this.props.getToken}
                   deleteCategory={this.deleteCategory}
                   currentUser={this.props.currentUser}
