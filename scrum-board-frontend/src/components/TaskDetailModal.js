@@ -77,11 +77,11 @@ class TaskDetailModal extends React.Component {
             </Menu.Item>
           </Menu>
         </Modal.Header>
-        <Modal.Content className='khaki'>
-          <Modal.Description>
-            <p>{content}</p>
-            <p>Created by: {user.username}</p>
-            <p>Assigned to: {assigned ? assigned.username : 'Nobody yet'}</p>
+        <Modal.Content className='khaki task-detail-container'>
+          <Modal.Description className='task-detail-description'>
+            <p className='task-detail-descrition-content'>{content}</p>
+            <p className='task-detail-descrition-creator'>Created by: {user.username}</p>
+            <p className='task-detail-descrition-assigned'>Assigned to: {assigned ? assigned.username : 'Nobody yet'}</p>
           </Modal.Description>
         </Modal.Content>
         <Confirm 

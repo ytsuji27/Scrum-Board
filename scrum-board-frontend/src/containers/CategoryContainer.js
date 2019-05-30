@@ -197,7 +197,8 @@ class CategoryContainer extends React.Component {
       const newColumnOrder = Array.from(this.state.columnOrder);
       newColumnOrder.splice(source.index, 1);
       newColumnOrder.splice(destination.index, 0, draggableId);
-      this.setState({ columnOrder: newColumnOrder }, () => this.patchProject())
+      this.setState({ columnOrder: newColumnOrder }, () => this.patchProject());
+      this.props.patchProjectsStateInApp(newColumnOrder, this.props.project);
     // IF task, ...
     } else if (type === 'task') {
       let droppedCategory = this.state.categories.find(category => category.id === destination.droppableId)
