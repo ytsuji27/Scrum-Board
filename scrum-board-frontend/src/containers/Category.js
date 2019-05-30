@@ -160,6 +160,7 @@ class Category extends React.Component {
                       icon={null}
                       onChange={this.handleOptionChange}
                       value={this.state.selectedOption}
+                      id='category-dropdown-menu'
                     />    
                     <Confirm 
                       open={this.state.openConfirmation} 

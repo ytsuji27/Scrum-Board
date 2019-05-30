@@ -65,6 +65,16 @@ class Dashboard extends React.Component {
     return pickableUsers;
   }
 
+  setPickableUsersForProject = () => {
+    let users = [];
+    this.props.users.forEach(user => {
+      if (!this.state.projectUsers.includes(user)) {
+        users.push(user);
+      }
+    })
+    return users;
+  }
+
   getUsersOnProject = pickableUsers => {
     let users = this.props.users.filter(user => {
       if (!pickableUsers.includes(user)) {
@@ -187,7 +197,9 @@ class Dashboard extends React.Component {
     }
 
     // Map over users and create objects for dropdown
-    this.state.pickableUsers.map(user => {
+    let users = this.setPickableUsersForProject();
+  
+    users.map(user => {
       let avatarPic = avatarChoice[user.avatar]
       let userObj = {
         key: user.username,
@@ -239,6 +251,7 @@ class Dashboard extends React.Component {
           openEditProjectModal={this.openEditProjectModal}
           selectedProject={this.state.selectedProject}
           deleteProject={this.props.deleteProject}
+          removeProjectFromState={this.props.removeProjectFromState}
           setShowPageToProjects={this.setShowPageToProjects}
           project={this.state.selectedProject}
           showProjectsPage={this.state.showProjectsPage}
