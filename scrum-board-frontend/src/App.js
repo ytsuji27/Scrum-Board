@@ -63,10 +63,12 @@ class App extends React.Component {
 
   // Automatically sends user to dashboard if a token is found in local storage
   componentDidMount() {
-    if (this.getToken()) {
+    if (this.getToken() !== 'undefined') {
       this.fetchProfile();
       this.fetchUsers();
       this.comboFetch();
+    } else {
+      localStorage.removeItem('jwt')
     }
   }
   

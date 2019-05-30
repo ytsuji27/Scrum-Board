@@ -54,8 +54,8 @@ class NewUserForm extends React.Component {
   }
 
   handleResponse = data => {
-    if (data.message) {
-      alert(data.message)
+    if (data.error) {
+      alert(data.error)
     } else {
       this.props.saveToken(data.jwt)
       this.props.setCurrentUser(data.user)
