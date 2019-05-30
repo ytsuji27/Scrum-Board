@@ -53,3 +53,26 @@
 #task-button {
   margin: 10px 0;
 }
+
+.task-detail-container {
+  height: 100%;
+}
+
+.task-detail-description {
+  position: relative;
+  height: 100%;
+}
+
+.task-detail-descrition-content {
+  font-size: 1.5em;
+}
+
+.task-detail-descrition-creator {
+  position: absolute;
+  bottom: 4%;
+}
+
+.task-detail-descrition-assigned {
+  position: absolute;
+  bottom: 3%;
+}
