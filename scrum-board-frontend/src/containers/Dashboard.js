@@ -125,6 +125,8 @@ class Dashboard extends React.Component {
         getToken={this.props.getToken}
         currentUser={this.props.currentUser}
         users={this.state.projectUsers}
+        patchProjectsStateInApp={this.props.patchProjectsStateInApp}
+        patchProjectsStateInAppDELETE={this.props.patchProjectsStateInAppDELETE}
       />
     )
   }

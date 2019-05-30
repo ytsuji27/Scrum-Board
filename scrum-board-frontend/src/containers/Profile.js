@@ -35,6 +35,10 @@ class Profile extends React.Component {
     return avatarChoice[avatar];
   }
 
+  // ########################### //
+  // ####### F E T C H ######### //
+  // ########################### //
+
   fetchTasksForUser() {
     let token = this.props.getToken();
     fetch(TASKS_URL, {
@@ -51,12 +55,10 @@ class Profile extends React.Component {
     this.fetchTasksForUser();
   }
 
-  getProjects = () => {
-    let projectIds = [];
-    this.state.tasks.forEach(task => {
-      if (projectIds.includes(task.project_id)) {
-
-      }
+  // ################################################# //
+  filterTasks = project => {
+    return this.state.tasks.filter(task => {
+      return task.project_id === project.id
     })
   }
 
@@ -66,6 +68,15 @@ class Profile extends React.Component {
     })
   }
 
+  displayTasksForProject = project => {
+    let tasks = this.filterTasks(project);
+    if (tasks.length === 0) {
+      return this.noTaskMessage();
+    } else {
+      return tasks.map(task => this.taskCard(task, project))
+    }
+  }
+
   projectCard = project => {
     return (
       <Card className='project-card custom-font' key={project.id}>
@@ -73,10 +84,7 @@ class Profile extends React.Component {
           <Card.Header className='custom-font'>{project.name}</Card.Header>
         </Card.Content>
         <Card.Content>
-          {this.state.tasks.length !== 0 ? null : 'No tasks assigned yet'}
-          {this.state.tasks.map(task => {
-            return this.taskCard(task, project)
-          })}
+          {this.displayTasksForProject(project)}
         </Card.Content>
       </Card>
     )
@@ -94,6 +102,18 @@ class Profile extends React.Component {
     }
   }
 
+  // ########################### //
+  // ######## MESSAGES ######### //
+  // ########################### //
+
+  noTaskMessage = () => {
+    return (
+      <Header as='h5' className='custom-font'>
+        No tasks assigned yet
+      </Header>
+    )
+  }
+
   noProjectsMessage = () => {
     return (
       <Header as='h4' className='profile-page-message'>
@@ -101,6 +121,10 @@ class Profile extends React.Component {
       </Header>
     )
   }
+
+  // ########################### //
+  // ####### R E N D E R ####### //
+  // ########################### //
 
   render() {
     const { avatar, username } = this.props.currentUser;
