@@ -47,14 +47,14 @@ class MenuBar extends React.Component {
         <Menu.Item>
           <Dropdown multiple icon='filter'>
             <Dropdown.Menu>
-              <Input icon='search' iconPosition='left' className='search' />
+              <Input icon='search' iconPosition='left' className='search' placeholder='[Under construction]'/>
               <Dropdown.Divider />
               <Dropdown.Header icon='tags' content='Tag Label' />
             </Dropdown.Menu>
           </Dropdown>
           <Dropdown icon='search'>
             <Dropdown.Menu>
-              <Input icon='search' placeholder='Search...' />
+              <Input icon='search' placeholder='[Under construction]' />
             </Dropdown.Menu>
           </Dropdown>
         </Menu.Item>

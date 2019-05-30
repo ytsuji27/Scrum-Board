@@ -63,7 +63,7 @@ class App extends React.Component {
 
   // Automatically sends user to dashboard if a token is found in local storage
   componentDidMount() {
-    if (this.getToken() !== 'undefined') {
+    if (this.getToken() !== 'undefined' && this.getToken() !== null) {
       this.fetchProfile();
       this.fetchUsers();
       this.comboFetch();
@@ -99,6 +99,7 @@ class App extends React.Component {
       this.setState({ allProjects: data1, userProjects: data2, allOfUsersProjects: finalProjects })
     })
   }
+
   // ########################### //
   // ####### MODAL STUFF ####### //
   // ########################### //
