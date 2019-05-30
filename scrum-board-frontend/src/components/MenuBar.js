@@ -45,7 +45,7 @@ class MenuBar extends React.Component {
       <Menu id='project-menu-bar'>
         <Menu.Item header>Projects</Menu.Item>
         <Menu.Item>
-          <Dropdown multiple icon='filter'>
+          {/* <Dropdown multiple icon='filter'>
             <Dropdown.Menu>
               <Input 
                 icon='search' 
@@ -56,7 +56,7 @@ class MenuBar extends React.Component {
               <Dropdown.Divider />
               <Dropdown.Header icon='tags' content='Tag Label' />
             </Dropdown.Menu>
-          </Dropdown>
+          </Dropdown> */}
           {/* <Dropdown icon='search'>
             <Dropdown.Menu>
               <Input icon='search' placeholder='[Under construction]' />
@@ -66,7 +66,12 @@ class MenuBar extends React.Component {
             transparent
             placeholder='Search projects...'
             onChange={ev=>this.props.handleSearch(ev)}
-          />
+            icon
+            iconPosition='left'
+          >
+            <Icon name='search' />
+            <input />
+          </Input>
         </Menu.Item>
         <Menu.Item position='right' onClick={this.handleAddProjectClick}>
           <Icon name='add' />
