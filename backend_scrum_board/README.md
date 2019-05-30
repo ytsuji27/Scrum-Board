@@ -1,24 +1,21 @@
-# README
+# Yutrello Back End (Rails)
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Installation
+To get your back end started, navigate to the directory you want to install the app on in your terminal and clone down the repo with 
+```
+git clone git@github.com:ytsuji27/Scrum-Board.git
+```
 
-Things you may want to cover:
+In your terminal, navigate into the back end folder
+```
+cd Scrum-Board/backend_scrum_board
+```
 
-* Ruby version
+and run the following to get the database created and server started
+```
+rails db:create
+rails db:migrate
+rails s -p 3000
+```
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+That's it. You should see the server start up and listening on port 3000
