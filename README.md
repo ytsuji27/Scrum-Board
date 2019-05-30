@@ -2,7 +2,7 @@
 
 Yutrello is a web application that helps users keep track of all their projects by letting them create a digital scrum board for each of their projects. The columns and tasks are all customizable with the ability to invite other users to their project and assigning tasks to them. It was built with a Ruby on Rails based backend and a React based frontend. The application uses JWT for authentication and react-beautiful-dnd to add drag-and-drop functionality.
 
-Deployed on Heroku [here] (link TBD) 
+Deployed on Heroku [here] (https://scrum-board-frontend.herokuapp.com/) 
 
 ![Main Page](scrum-board-frontend/src/assets/screenshots/mainPage.png)
 
@@ -17,6 +17,9 @@ These are the key features and functionality  built into the webiste:
 * Rearrange columns and tasks using drag-and-drop
 
 ![Show Project Page](scrum-board-frontend/src/assets/screenshots/projectPage.png)
+
+## Installation
+If you want to deploy this app locally, checkout the README's in each folder (backend_scrum_board and scrum-board-frontend). It is advised to start with the back end since the front end relies on the back end running on port 3000.
 
 ## Contributing
 Contributions are welcome in all shapes and forms, especially bug fixes and feature additions.
