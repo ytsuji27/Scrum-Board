@@ -47,16 +47,26 @@ class MenuBar extends React.Component {
         <Menu.Item>
           <Dropdown multiple icon='filter'>
             <Dropdown.Menu>
-              <Input icon='search' iconPosition='left' className='search' placeholder='[Under construction]'/>
+              <Input 
+                icon='search' 
+                iconPosition='left' 
+                className='search' 
+                placeholder='[Under construction]'
+              />
               <Dropdown.Divider />
               <Dropdown.Header icon='tags' content='Tag Label' />
             </Dropdown.Menu>
           </Dropdown>
-          <Dropdown icon='search'>
+          {/* <Dropdown icon='search'>
             <Dropdown.Menu>
               <Input icon='search' placeholder='[Under construction]' />
             </Dropdown.Menu>
-          </Dropdown>
+          </Dropdown> */}
+          <Input
+            transparent
+            placeholder='Search projects...'
+            onChange={ev=>this.props.handleSearch(ev)}
+          />
         </Menu.Item>
         <Menu.Item position='right' onClick={this.handleAddProjectClick}>
           <Icon name='add' />
@@ -129,11 +139,11 @@ class MenuBar extends React.Component {
         <Menu.Item id='avatar-container'>
           {this.props.usersOnProject.map(user => (
             <Popup
-            key={user.id}
-            content={user.username}
-            trigger={<Image src={avatarChoice[user.avatar]} avatar id={this.setId()} />}
+              key={user.id}
+              content={user.username}
+              trigger={<Image src={avatarChoice[user.avatar]} avatar id={this.setId()} />}
             />
-            ))}
+          ))}
         </Menu.Item>
 
         <Menu.Item position='right' onClick={this.handleAddUser}>
