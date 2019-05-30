@@ -9,3 +9,19 @@
   border: 0px;
   box-shadow: 0px 0px 0px 0px;
 }
+
+.app-logo {
+  width: 70px !important;
+}
+
+#app-logo-item {
+  margin-left: 0px;
+  padding: 0px;
+  
+}
+
+#navbar-segment {
+  padding-left: 14px;
+  padding-top: 5px;
+  padding-bottom: 5px; 
+}

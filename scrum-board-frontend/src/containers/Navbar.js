@@ -2,7 +2,7 @@
 import React from 'react';
 import { Menu, Segment, Dropdown, Image } from 'semantic-ui-react';
 //####### IMPORT IMAGES #######//
-import logo from '../assets/logo/logo1.jpg';
+import logo from '../assets/logo/logo.png';
 import option1 from '../assets/avatar/Avatar (1).svg';
 import option2 from '../assets/avatar/Avatar (2).svg';
 import option3 from '../assets/avatar/Avatar (3).svg';
@@ -71,11 +71,11 @@ class Navbar extends React.Component {
 
   render() {
     return (
-      <Segment inverted>
+      <Segment inverted id='navbar-segment'>
         <Menu inverted secondary>
         
-          <Menu.Item>
-            <img src={logo} alt="logo" />Yutrello
+          <Menu.Item id='app-logo-item'>
+            <img src={logo} alt="logo" className='app-logo' />
           </Menu.Item>
 
           <Menu.Menu position='right'>

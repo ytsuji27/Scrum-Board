@@ -217,7 +217,7 @@ class Dashboard extends React.Component {
               options={this.createOptionsForDropdown()}
             />
             <Button id='add-user-button' color='blue' type='submit' onClick={this.postUserProject}>
-              Create
+              Add User
             </Button>
         </Modal.Content>
       </Modal>
