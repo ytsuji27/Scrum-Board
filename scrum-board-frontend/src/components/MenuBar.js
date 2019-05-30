@@ -1,7 +1,7 @@
 //####### IMPORT PACKAGES #######//
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import { Confirm, Menu, Dropdown, Input, Icon, Image, Popup } from 'semantic-ui-react';
+import { Confirm, Menu, Input, Icon, Image, Popup } from 'semantic-ui-react';
 //####### IMPORT IMAGES #######//
 import option1 from '../assets/avatar/Avatar (1).svg';
 import option2 from '../assets/avatar/Avatar (2).svg';

@@ -39,16 +39,7 @@ class App extends React.Component {
   }
 
   setCurrentUser = user => {
-    // this.setState({
-    //   currentUser: user,
-    //   loggedIn: true
-    // })
-    // this.fetchUsers();
-    // history.push('/');
     this.comboFetch();
-    // Redirects user to dashboard after successful login
-
-
   }
 
   logout = () => {
@@ -68,8 +59,6 @@ class App extends React.Component {
   // Automatically sends user to dashboard if a token is found in local storage
   componentWillMount() {
     if (this.getToken() !== 'undefined' && this.getToken() !== null) {
-      // this.fetchProfile();
-      // this.fetchUsers();
       this.setState({ loggedIn: true })
       this.comboFetch();
     } else {
@@ -247,6 +236,33 @@ class App extends React.Component {
     .then(resp => this.removeProjectFromState(project))
   }
 
+  // Patches columnOrder of project when adding new column
+  patchProjectsStateInApp = (columnOrder, patchProject) => {
+    let newAllProjects = this.state.allProjects.map(project => {
+      if (project.id === patchProject.id) {
+        project.columnOrder = columnOrder;
+      }
+      return project;
+    })
+    let newAllOfUsersProjects = this.state.allOfUsersProjects.map(project => {
+      if (project.id === patchProject.id) {
+        project.columnOrder = columnOrder;
+      }
+      return project;
+    })
+    let newDisplayedProjects = this.state.displayedProjects.map(project => {
+      if (project.id === patchProject.id) {
+        project.columnOrder = columnOrder;
+      }
+      return project;
+    })
+    this.setState({
+      allProjects: newAllProjects,
+      allOfUsersProjects: newAllOfUsersProjects,
+      displayedProjects: newDisplayedProjects
+    })
+  }
+
   // Removes deleted project from state, so dash updates on delete
   removeProjectFromState = deleteThisProject => {
     let newProjectsArray = this.state.allProjects.filter(project => {
@@ -305,6 +321,8 @@ class App extends React.Component {
                                                       userProjects={this.state.userProjects}
                                                       allOfUsersProjects={this.state.displayedProjects}
                                                       handleSearch={this.handleSearch}
+                                                      patchProjectsStateInApp={this.patchProjectsStateInApp}
+                                                      patchProjectsStateInAppDELETE={this.patchProjectsStateInAppDELETE}
                                                     />
                                                   ))
                                         } 

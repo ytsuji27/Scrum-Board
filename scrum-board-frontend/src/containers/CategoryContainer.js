@@ -136,6 +136,7 @@ class CategoryContainer extends React.Component {
       columnOrder: newColumnOrder,
       categories: newCategories 
     })
+    this.props.patchProjectsStateInApp(newColumnOrder, this.props.project);
   }
 
   deleteCategory = category => {
@@ -160,6 +161,7 @@ class CategoryContainer extends React.Component {
       categories: newCategories,
       columnOrder: newOrder 
     })
+    this.props.patchProjectsStateInApp(newOrder, this.props.project);
     this.patchProject();
   }
 
