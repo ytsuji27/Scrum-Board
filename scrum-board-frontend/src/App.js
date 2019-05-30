@@ -44,9 +44,11 @@ class App extends React.Component {
     //   loggedIn: true
     // })
     // this.fetchUsers();
+    // history.push('/');
     this.comboFetch();
     // Redirects user to dashboard after successful login
-    history.push('/');
+
+
   }
 
   logout = () => {
@@ -64,10 +66,11 @@ class App extends React.Component {
   }
 
   // Automatically sends user to dashboard if a token is found in local storage
-  componentDidMount() {
+  componentWillMount() {
     if (this.getToken() !== 'undefined' && this.getToken() !== null) {
       // this.fetchProfile();
       // this.fetchUsers();
+      this.setState({ loggedIn: true })
       this.comboFetch();
     } else {
       localStorage.removeItem('jwt')
@@ -101,7 +104,7 @@ class App extends React.Component {
         }
       })
     ])
-    // data1: Projects, data2: UserProjects, data3: Profile, data4: Users
+    // data1: Projects | data2: UserProjects | data3: Profile | data4: Users
     .then(([res1, res2, res3, res4]) => Promise.all([res1.json(), res2.json(), res3.json(), res4.json()]))
     .then(([data1, data2, data3, data4]) => {
       // Gets all userprojects for currentUser
@@ -121,6 +124,7 @@ class App extends React.Component {
         allOfUsersProjects: finalProjects,
         displayedProjects: finalProjects 
       })
+      history.push('/');
     })
   }
 

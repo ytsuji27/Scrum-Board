@@ -125,8 +125,8 @@ class CategoryContainer extends React.Component {
       headers: {...HEADERBODY, Authorization: `Bearer ${token}`},
       body: JSON.stringify(body)
     })
-    .then(resp => resp.json())
-    .then(data => console.log(data))
+    // .then(resp => resp.json())
+    // .then(data => console.log(data))
   }
 
   addNewCategoryToState = newCategory => {
