@@ -16,27 +16,24 @@ class ProjectContainer extends React.Component {
   }
 
   showProjects = () => {
-    if (this.props.projects.length !== 0) {
-      return (
-        <Card.Group>
-          {this.props.projects.map((project, index) => {
-            return <ProjectCard 
-            key={index} 
-            project={project} 
-            setSelectedProject={(ev) => this.props.setSelectedProject(ev, project)}
-            />
-          })}
-        </Card.Group>
-      )
-    } else {
-      return null
-    }
+    return (
+      <Card.Group>
+        {this.props.projects.map((project, index) => {
+          return <ProjectCard 
+          key={index} 
+          project={project} 
+          setSelectedProject={(ev) => this.props.setSelectedProject(ev, project)}
+          />
+        })}
+      </Card.Group>
+    )
   }
+
   render() {
 
     return (
       <>
-        {this.showProjects()}
+        {this.props.projects.length === 0 ? null : this.showProjects()}
       </>
     )
   }

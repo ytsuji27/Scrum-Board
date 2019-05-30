@@ -245,6 +245,7 @@ class Dashboard extends React.Component {
           openAddUserModal={this.openAddUserModal}
           usersOnProject={this.state.projectUsers}
           currentUser={this.props.currentUser}
+          handleSearch={this.props.handleSearch}
         />
         {/* CONDITIONALLY RENDER PAGES */}
         {/* Show Project page */}
