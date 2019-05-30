@@ -77,3 +77,7 @@
   flex-direction: row-reverse;
   padding-left: 50px;
 }
+
+#category-dropdown-menu {
+  z-index: 101;
+}

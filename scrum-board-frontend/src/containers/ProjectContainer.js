@@ -20,9 +20,9 @@ class ProjectContainer extends React.Component {
       <Card.Group>
         {this.props.projects.map((project, index) => {
           return <ProjectCard 
-          key={index} 
-          project={project} 
-          setSelectedProject={(ev) => this.props.setSelectedProject(ev, project)}
+            key={index} 
+            project={project} 
+            setSelectedProject={(ev) => this.props.setSelectedProject(ev, project)}
           />
         })}
       </Card.Group>

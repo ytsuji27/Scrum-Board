@@ -96,6 +96,7 @@ class MenuBar extends React.Component {
   handleConfirm = () => {
     this.setState({ openConfirmation: false })
     this.props.deleteProject(this.props.selectedProject);
+    this.props.removeProjectFromState(this.props.selectedProject);
     this.props.setShowPageToProjects();
   }
 

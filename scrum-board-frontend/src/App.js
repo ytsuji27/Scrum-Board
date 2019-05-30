@@ -233,7 +233,7 @@ class App extends React.Component {
         Authorization: `Bearer ${token}`
       }
     })
-    .then(resp => this.removeProjectFromState(project))
+    .then(resp => this.comboFetch())
   }
 
   // Patches columnOrder of project when adding new column
